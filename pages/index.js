@@ -1,11 +1,16 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
-import styles from '../styles/Home.module.css';
+import { sanityClient } from '../src/config/sanityClient';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home() {
+export default function Home({booking}) {
+  const router = useRouter()
+  console.log("🚀 ~ file: index.js:11 ~ Home ~ router", router)
+  
   return (
     <>
       <Head>
@@ -14,7 +19,33 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Link href="/" locale="fr">
+       French
+      </Link>
+      <Link href="/" locale="en">
+       English
+      </Link>
       <h1 className="text-3xl font-bold underline">Mams House index page</h1>
+      {
+        booking.map((item,i)=>(
+          <h2 className='mt-4 text-lg uppercase' key={i}>{item.title}</h2>
+        ))
+      }
     </>
   );
+}
+
+
+
+export async function getStaticProps(pageContext) {
+  const locale = pageContext.locale
+  const booking = await sanityClient.fetch(`*[_type == "booking"]{
+    "title": title[$locale]
+  }`, {locale})
+
+  return {
+    props: {
+      booking
+    }
+  };
 }
