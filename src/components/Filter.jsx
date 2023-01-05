@@ -19,7 +19,7 @@ const FList = ({title,placeholder,icon}) => {
 export default function Filter() {
   const [origin, setOrigin] = useState('Lieux')
   return (
-    <div className='rounded-xl filter mb-40 border-[2px] border-white p-8 container mx-auto'>
+    <div className='rounded-xl filter border-[2px] border-white p-8 container mx-auto'>
         <ul className='flex items-center font-bold pb-6 border-b-[2px] border-[#fffcf47b] text-sm gap-24'>
             <li className={`cursor-pointer ${origin === 'Lieux' && 'item'}`} onClick={()=>setOrigin('Lieux')}>Lieux</li>
             <li className={`cursor-pointer ${origin === 'Activités' && 'item'}`} onClick={()=>setOrigin('Activités')}>Activités</li>

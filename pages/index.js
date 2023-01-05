@@ -18,7 +18,7 @@ export default function Home({ booking }) {
       </Head>
      <Main/>
      <section className="-mt-32"><Filter/></section>
-     <HomeCard/>
+     <section className="mt-12 mb-20"> <HomeCard/></section>
     </>
   );
 }

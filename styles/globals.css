@@ -5,6 +5,15 @@
 /* imports  */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
 
+@layer components {
+    .sub-heading{
+        @apply text-[43.35px] uppercase
+    }
+    .main-btn{
+        @apply border border-black font-semibold text-base p-3 px-6 rounded-3xl
+    }
+}
+
 @font-face {
     font-family: Bangla_MN;
     src: url('../public/fonts/Bangla_MN.ttf');
