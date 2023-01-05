@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function HomeCard() {
   return (
-    <div className='container p-6 md:flex mx-auto'>
+    <div className='container p-4 md:flex mx-auto'>
         <div>
             <div className='relative rounded-[30px] md:h-[673px] md:w-[450px]'>
                 <OwnImage url={heroCard} alt="herocard"/>
