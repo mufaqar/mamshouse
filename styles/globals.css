@@ -30,7 +30,7 @@ body{
     backdrop-filter: blur(20px) !important;
     border-radius: 20px !important;
 }
-.filter .item {
+.filter .item, nav .nav_item {
     position:  relative;
 }
 .filter .item:after{
@@ -40,5 +40,15 @@ body{
     right: 0;
     height: 2px;
     width: 100%;
+    background: black;
+}
+nav .nav_item:after{
+    position: absolute;
+    content: '';
+    bottom: -7px;
+    right: 49%;
+    height: 5px;
+    width: 5px;
+    border-radius: 100%;
     background: black;
 }

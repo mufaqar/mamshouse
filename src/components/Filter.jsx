@@ -25,14 +25,14 @@ export default function Filter() {
             <li className={`cursor-pointer ${origin === 'Activités' && 'item'}`} onClick={()=>setOrigin('Activités')}>Activités</li>
             <li className={`cursor-pointer ${origin === 'Région' && 'item'}`} onClick={()=>setOrigin('Région')}>Région</li>
         </ul>
-        <div className='flex justify-between  px-10 pt-10 mb-5 items-center'>
+        <div className='flex flex-col md:flex-row justify-between md:px-10 pt-10 mb-5 gap-y-5 md:items-center'>
             <FList title="Location" placeholder="Quel bien vous irait ?" icon={<TbLocation/>}/>
             <FList title="Arrivée" placeholder="Quand voudriez vous partir ?" icon={<AiOutlineCalendar/>}/>
             <FList title="Départ" placeholder="Quand voudriez vous partir ?" icon={<AiOutlineCalendar/>}/>
             <FList title="Voyageurs" placeholder="Ajoutez un voyageur ?" icon={<AiOutlineTeam/>}/>
             {/* search */}
             <div>
-               <div className='cursor-pointer border border-black p-2 rounded-full'><FiSearch/> </div>
+               <div className='cursor-pointer inline-block border border-black p-2 rounded-full'><FiSearch/> </div>
             </div>
         </div>
     </div>
