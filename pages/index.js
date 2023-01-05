@@ -1,16 +1,13 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import { Inter } from '@next/font/google';
-import { sanityClient } from '../src/config/sanityClient';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 
-const inter = Inter({ subsets: ['latin'] });
+import Head from "next/head";
+// import { Inter } from "@next/font/google";
+import { sanityClient } from "../src/config/sanityClient";
+import { Filter, HomeCard, Main } from "../src/components";
 
-export default function Home({booking}) {
-  const router = useRouter()
-  console.log("🚀 ~ file: index.js:11 ~ Home ~ router", router)
-  
+
+// const inter = Inter({ subsets: ["latin"] });
+export default function Home({ booking }) {
+
   return (
     <>
       <Head>
@@ -19,33 +16,30 @@ export default function Home({booking}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Link href="/" locale="fr">
-       French
-      </Link>
-      <Link href="/" locale="en">
-       English
-      </Link>
-      <h1 className="text-3xl font-bold underline">Mams House index page</h1>
-      {
-        booking.map((item,i)=>(
-          <h2 className='mt-4 text-lg uppercase' key={i}>{item.title}</h2>
-        ))
-      }
+     <Main/>
+     <section className="-mt-32"><Filter/></section>
+     <HomeCard/>
     </>
   );
 }
 
 
 
-export async function getStaticProps(pageContext) {
-  const locale = pageContext.locale
-  const booking = await sanityClient.fetch(`*[_type == "booking"]{
-    "title": title[$locale]
-  }`, {locale})
+export async function getServerSideProps(pageContext) {
+  const locale = pageContext.locale;
+  const booking = await sanityClient.fetch(
+    `*[_type == "booking"]{
+    "title": title[$locale],
+    _id
+  }`,
+    { locale }
+  );
 
   return {
     props: {
-      booking
-    }
+      booking,
+    },
   };
 }
+
+

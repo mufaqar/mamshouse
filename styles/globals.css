@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* imports  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+@font-face {
+    font-family: Bangla_MN;
+    src: url('../public/fonts/Bangla_MN.ttf');
+}
+.font-bangla-mn{
+    font-family: Bangla_MN;
+}
+body{
+    font-family: 'Inter', sans-serif;
+}
+.filter{
+    background: rgba(255, 252, 244, 0.7) !important;
+    box-shadow: 0px 134px 80px rgba(0, 0, 0, 0.01), 0px 67.8375px 34.875px rgba(0, 0, 0, 0.00675), 0px 26.8px 13px rgba(0, 0, 0, 0.005), 0px 5.8625px 4.625px rgba(0, 0, 0, 0.00325) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 20px !important;
+}
+.filter .item {
+    position:  relative;
+}
+.filter .item:after{
+    position: absolute;
+    content: '';
+    bottom: -26px;
+    right: 0;
+    height: 2px;
+    width: 100%;
+    background: black;
+}

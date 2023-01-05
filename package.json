@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "sanity": "sanity dev",
-    "sanitystart": "sanity start",
-    "sanitybuild": "sanity build",
-    "sanitydeploy": "sanity deploy"
+    "sanity-start": "sanity start",
+    "sanity-build": "sanity build",
+    "sanity-deploy": "sanity deploy"
   },
   "dependencies": {
     "@next/font": "13.1.1",
