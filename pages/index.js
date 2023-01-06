@@ -17,8 +17,8 @@ export default function Home({ booking }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
      <Main/>
-     <section className="md:-mt-32"><Filter/></section>
-     <section className="mt-12 mb-20"> <HomeCard/></section>
+     <section className="md:-mt-32 -mt-12 p-1"><Filter/></section>
+     <section className="md:mt-12 mt-6 mb-20"> <HomeCard/></section>
     </>
   );
 }

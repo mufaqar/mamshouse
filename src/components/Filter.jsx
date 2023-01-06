@@ -9,7 +9,7 @@ const FList = ({title,placeholder,icon}) => {
         <div className='flex'>
             <div className='transform text-[#C3C3C3] text-lg pt-2 -scale-x-100'>{icon}</div>
             <div className='pl-2'>
-                <h6 className='text-[22px] font-bold'>{title}</h6>
+                <h6 className='text-base md:text-[22px] font-bold'>{title}</h6>
                 <p className='text-[#C3C3C3] text-sm font-medium'>{placeholder}</p>
             </div>
         </div>
@@ -20,7 +20,7 @@ export default function Filter() {
   const [origin, setOrigin] = useState('Lieux')
   return (
     <div className='rounded-xl filter border-[2px] border-white p-8 container mx-auto'>
-        <ul className='flex items-center font-bold pb-6 border-b-[2px] border-[#fffcf47b] text-sm gap-24'>
+        <ul className='flex items-center font-bold pb-6 border-b-[2px] border-[#fffcf47b] gap-10 text-sm md:gap-24'>
             <li className={`cursor-pointer ${origin === 'Lieux' && 'item'}`} onClick={()=>setOrigin('Lieux')}>Lieux</li>
             <li className={`cursor-pointer ${origin === 'Activités' && 'item'}`} onClick={()=>setOrigin('Activités')}>Activités</li>
             <li className={`cursor-pointer ${origin === 'Région' && 'item'}`} onClick={()=>setOrigin('Région')}>Région</li>

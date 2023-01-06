@@ -52,3 +52,8 @@ nav .nav_item:after{
     border-radius: 100%;
     background: black;
 }
+.PageBanner{
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
