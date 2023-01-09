@@ -10,15 +10,18 @@ import Link from "next/link";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { residence } from "../../public/mock.data/mockdata";
 
+
 const SliderCard = ({item}) => {
+  const {id} = item
+
   return (
     <>
       <div className="p-2 mt-2 ">
         <div className="relative">
           <Image
-            src={heroCard}
+            src={heroCard }
             alt="hero card"
-            className="w-full h-full rounded-[20px]"
+            className="w-full h-full min-h-[500px] rounded-[20px]"
           />
           <div className="absolute flex flex-col justify-end top-0 text-white w-full rounded-[20px] h-full p-3 px-5">
             <div className="flex justify-between items-center">
@@ -80,7 +83,7 @@ export default function ResidenceSlider() {
   };
 
   return (
-    <section className="mt-9 container mx-auto p-1 md:p-0 mb-4">
+    <section className="mt-9 container mx-auto p-1 md:p-0 mb-10">
       <h1 className="sub-heading font-bangla-mn capitalize">Nos Résidences</h1>
       <div className="relative">
         <Slider {...settings}>
