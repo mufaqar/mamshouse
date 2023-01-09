@@ -10,7 +10,7 @@
         @apply md:text-[55px] text-3xl capitalize 
     }
     .sub-heading{
-        @apply md:text-[43.35px] uppercase text-[20px]
+        @apply md:text-[43.35px] uppercase text-[26px]
     }
     .main-btn{
         @apply border border-black font-semibold text-base p-3 px-6 rounded-3xl
