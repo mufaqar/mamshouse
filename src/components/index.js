@@ -4,3 +4,5 @@ export {default as Filter} from './Filter'
 export {default as HomeCard} from './HomeCard'
 export {default as OwnImage} from './OwnImage'
 export {default as PageBanner} from './PageBanner'
+export {default as ResidenceSlider} from './Residence.slider'
+

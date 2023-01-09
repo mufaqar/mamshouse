@@ -7,8 +7,8 @@ export default function HomeCard() {
   return (
     <div className='container p-4 md:flex mx-auto'>
         <div>
-            <div className='relative rounded-[30px] md:h-[673px] md:w-[450px]'>
-                <OwnImage url={heroCard} alt="herocard"/>
+            <div className='relative rounded-[30px] md:h-[673px] md:w-[370px] lg:w-[450px]'>
+                <div className=''><OwnImage url={heroCard} alt="herocard"/></div>
                 <div className='flex flex-col justify-end w-full px-8 h-full absolute top-0 rounded-[22px]'>
                     <div className='flex justify-between text-white pb-5 items-center'>
                         <h4 className='text-sm'><b>Poppengine,</b> Sénégal</h4>
@@ -17,7 +17,7 @@ export default function HomeCard() {
                 </div>
             </div>
         </div>
-        <div className='md:pl-24 pt-16 w-full md:max-w-[680px]'>
+        <div className='md:pl-10 lg:pl-24 md:pt-0 mt-10 lg:pt-16 w-full md:max-w-[680px]'>
             <h2 className='sub-heading font-bangla-mn'>TINY B.</h2>
             <p className='font-medium'>Facilisi dolor eget nulla elementum parturient cursus mauris vestibulum.
             Condimentum est nunc duis eros euismod consectetur sed. Et ullamcorper lobortis id aliquet lobortis malesuada eget mi pellentesque. Risus et at ornare tellus dictumst faucibus augue elementum. 

@@ -6,8 +6,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
 
 @layer components {
+    .main-heading{
+        @apply md:text-[55px] text-3xl capitalize 
+    }
     .sub-heading{
-        @apply text-[43.35px] uppercase
+        @apply md:text-[43.35px] uppercase text-[20px]
     }
     .main-btn{
         @apply border border-black font-semibold text-base p-3 px-6 rounded-3xl
@@ -56,4 +59,19 @@ nav .nav_item:after{
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
+}
+.slick-slider .slick-track, .slick-slider .slick-list{
+    padding: 0px 0px !important;
+    position: relative !important;
+}
+ .slick-list::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    background: #000;
+} 
+._sideBlurbg{
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 59.2%);
 }
