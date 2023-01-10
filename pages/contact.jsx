@@ -19,9 +19,9 @@ export default function Contact() {
         pageType="contact"
         info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
       />
-      <section className="container mx-auto mt-28">
-        <div className="flex items-center">
-          <div className="w-9/12">
+      <section className="container mx-auto mt-28 p-2 md:p-0">
+        <div className="md:flex items-center">
+          <div className="md:8/12 lg:w-9/12">
             <div className="max-w-[500px]">
               <h3 className="font-bangla-mn text-[38px]">Nous contacter</h3>
               <p className="mt-2 font-light text-base">
@@ -31,7 +31,7 @@ export default function Contact() {
               </p>
             </div>
           </div>
-          <div className="w-3/12">
+          <div className="md:w-4/12 lg:w-3/12 mt-8 md:mt-0">
             {/* socials */}
             <ul className="w-full flex p-0 md:pl-10 flex-col justify-center gap-6">
               <li>
@@ -70,8 +70,8 @@ export default function Contact() {
           </div>
         </div>
         {/* 2 */}
-        <div className="flex mt-20 items-center">
-          <div className="w-9/12">
+        <div className="md:flex mt-20 items-center">
+          <div className="md:w-8/12 lg:w-9/12">
             <div className="max-w-[500px]">
               <h3 className="font-bangla-mn text-[38px]">Reservation</h3>
               <p className="mt-2 font-light text-base">
@@ -79,14 +79,14 @@ export default function Contact() {
               </p>
             </div>
           </div>
-          <div className="w-3/12">
+          <div className="md:4/12 lg:w-3/12 mt-8 md:mt-0">
             <button className="main-btn w-full">réserver maintenant</button>
             <button className="mt-6 text-center font-semibold text-xs flex items-center gap-1 justify-center w-full">réserver sur Whatsapp <HiOutlineArrowSmRight size={18}/></button>
           </div>
         </div>
         {/* 3 */}
-        <div className="flex mt-20 mb-40 items-center">
-          <div className="w-9/12">
+        <div className="md:flex mt-20 mb-20 md:mb-40 items-center">
+          <div className="md:w-8/12 lg:w-9/12">
             <div className="max-w-[500px]">
               <h3 className="font-bangla-mn text-[38px]">Locations</h3>
               <p className="mt-2 font-light text-base">
@@ -96,13 +96,13 @@ export default function Contact() {
               </p>
             </div>
           </div>
-          <div className="w-3/12">
-            <button className="text-sm gap-2 md:whitespace-nowrap flex justify-center items-center">
+          <div className="md:w-4/12 lg:w-3/12 mt-8 md:mt-0">
+            <button className="text-sm gap-2 lg:whitespace-nowrap flex justify-center items-center">
                 <GrHomeRounded size={14} />
                 1 route du pilier, 22600 Poppengine, Sénégal
                 <HiOutlineArrowSmRight size={16}/>
             </button>
-            <button className="text-sm mt-3 gap-2 md:whitespace-nowrap flex justify-center items-center">
+            <button className="text-sm mt-3 gap-2 lg:whitespace-nowrap flex justify-center items-center">
                 <GrHomeRounded size={14} />
                 1 route du pilier, 22600 Poppengine, Sénégal
                 <HiOutlineArrowSmRight size={16}/>
