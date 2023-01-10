@@ -135,10 +135,16 @@ nav .nav_item:after{
 ._calendar div>div{
     width: 100% !important;
 }
+.rmdp-day.rmdp-deactive:hover>span{
+    color: #d6d6d6 !important;
+    background: transparent !important;
+    cursor: default;
+}
 .rmdp-day:hover>span{
     color: #fff !important;
     background: #000 !important;
 }
+
 
 
 @media (max-width: 768px) {

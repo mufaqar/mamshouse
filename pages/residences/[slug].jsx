@@ -17,10 +17,6 @@ import { changeOpenState } from "../../src/store/features/openBookingTabSlice/op
 const Slug = () => {
   const [shortInfo, setShortInfo] = useState(false);
   const openBookingTab = useSelector((state) => state.openBookingTab.open);
-  console.log(
-    "🚀 ~ file: [slug].jsx:22 ~ Slug ~ openBookingTab",
-    openBookingTab
-  );
   const dispatch = useDispatch();
 
   return (
@@ -150,13 +146,14 @@ export default Slug;
 
 const ResidenceOrder = () => {
   const [values, setValues] = useState([
-    new DateObject().setDay(4).subtract(1, "month"),
-    new DateObject().setDay(4).add(1, "month"),
+    new DateObject().setDay(4).subtract(0, "month"),
+    new DateObject().setDay(4).add(0, "month"),
   ]);
   console.log(values[0]);
   console.log(values[0].month);
   console.log(values[0].year);
   console.log(values[0].dayOfBeginning);
+  const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."]
 
   return (
     <>
@@ -175,6 +172,8 @@ const ResidenceOrder = () => {
             numberOfMonths={2}
             showOtherDays
             className="_calendar"
+            weekDays={weekDays}
+          
           />
           <div>
             <button className="text-sm font-normal underline flex justify-end w-full pr-7 mt-4 leading-8">
