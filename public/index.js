@@ -5,6 +5,12 @@ export {default as Two} from './images/two.png'
 export {default as Three} from './images/three.png'
 export {default as Four} from './images/four.png'
 export {default as Table} from './images/table.png'
+export {default as ActivitiesPageBanner} from './images/activitiespageBanner.png'
+export {default as E1} from './images/e1.png'
+export {default as E2} from './images/e2.png'
+export {default as E3} from './images/e3.png'
+export {default as ContactUsBannerBg} from './images/contact-us-page-banner.png'
+
 
 
 

@@ -10,22 +10,27 @@ import { One, Two, Three, Four } from "../../public";
 import { Calendar } from "react-multi-date-picker";
 import { DateObject } from "react-multi-date-picker";
 import { Feature } from "../../public/mock.data/feature";
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { changeOpenState } from "../../src/store/features/openBookingTabSlice/openBookingTabSlice";
 
-
-
-
 const Slug = () => {
   const [shortInfo, setShortInfo] = useState(false);
-  const openBookingTab = useSelector((state)=>state.openBookingTab.open)
-  console.log("🚀 ~ file: [slug].jsx:22 ~ Slug ~ openBookingTab", openBookingTab)
-  const dispatch = useDispatch()
+  const openBookingTab = useSelector((state) => state.openBookingTab.open);
+  console.log(
+    "🚀 ~ file: [slug].jsx:22 ~ Slug ~ openBookingTab",
+    openBookingTab
+  );
+  const dispatch = useDispatch();
 
   return (
     <>
-      <PageBanner src={ResidenceBannerImage} />
+      <PageBanner
+        src={ResidenceBannerImage}
+        heading=" Les Residences"
+        info="Lorem ipsum dolor sit amet consectetur. In ipsum ac in posuere cursus in cursus eleifend. Nisi in dolor aliquet nunc quis tortor. Fusce at enim et amet viverra. Dui suspendisse scelerisque justo ultrices in convallis orci id. Purus at elit nulla pretium neque purus eget."
+        pageType="residence"
+      />
       <section className="mt-9 container mx-auto p-2 md:p-0 mb-5">
         <Link href="/residences">
           <h1 className="text-sm font-bangla-mn flex capitalize">
@@ -126,14 +131,17 @@ const Slug = () => {
               <button className="border w-full p-2 mt-4 border-black rounded-full text-base font-semibold hover:bg-black hover:text-white">
                 réserver maintenant
               </button>
-              <h6 className="text-sm font-semibold mt-4 text-center underline cursor-pointer" onClick={()=>dispatch(changeOpenState())}>
-                {openBookingTab ? '-' : '+'} de détails
+              <h6
+                className="text-sm font-semibold mt-4 text-center underline cursor-pointer"
+                onClick={() => dispatch(changeOpenState())}
+              >
+                {openBookingTab ? "-" : "+"} de détails
               </h6>
             </div>
           </div>
         </div>
       </section>
-      { openBookingTab && <ResidenceOrder /> }
+      {openBookingTab && <ResidenceOrder />}
     </>
   );
 };
@@ -175,7 +183,9 @@ const ResidenceOrder = () => {
           </div>
         </div>
         <div className="col-span-2 px-4 pt-2">
-          <h3 className="font-normal text-[#1E1E1E] text-xl">À propos de ce logement</h3>
+          <h3 className="font-normal text-[#1E1E1E] text-xl">
+            À propos de ce logement
+          </h3>
           <ul className="mt-5">
             {Feature.map((item, i) => {
               return (
@@ -206,13 +216,19 @@ const ResidenceOrder = () => {
                 </div>
               </div>
               <div className="mt-5">
-                <div className="flex items-center gap-1"><AiFillStar/><h5 className="font-semibold text-sm">Confort</h5></div>
+                <div className="flex items-center gap-1">
+                  <AiFillStar />
+                  <h5 className="font-semibold text-sm">Confort</h5>
+                </div>
                 <div className="flex items-center gap-3 text-xs">
                   <progress id="file" value="70" max="100" /> <span>7,3</span>
                 </div>
               </div>
               <div className="mt-5">
-                <div className="flex items-center gap-1"><AiFillStar/><h5 className="font-semibold text-sm">Localisation</h5></div>
+                <div className="flex items-center gap-1">
+                  <AiFillStar />
+                  <h5 className="font-semibold text-sm">Localisation</h5>
+                </div>
                 <div className="flex items-center gap-3 text-xs">
                   <progress id="file" value="70" max="100" /> <span>4,3</span>
                 </div>
@@ -226,20 +242,27 @@ const ResidenceOrder = () => {
                 </div>
               </div>
               <div className="mt-5">
-                <div className="flex items-center gap-1"><AiFillStar/><h5 className="font-semibold text-sm">Propreté</h5></div>
+                <div className="flex items-center gap-1">
+                  <AiFillStar />
+                  <h5 className="font-semibold text-sm">Propreté</h5>
+                </div>
                 <div className="flex items-center gap-3 text-xs">
                   <progress id="file" value="100" max="100" /> <span>5,0</span>
                 </div>
               </div>
               <div className="mt-5">
-                <div className="flex items-center gap-1"><h5 className="font-semibold text-sm">Communication</h5></div>
+                <div className="flex items-center gap-1">
+                  <h5 className="font-semibold text-sm">Communication</h5>
+                </div>
                 <div className="flex items-center gap-3 text-xs">
                   <progress id="file" value="30" max="100" /> <span>2,3</span>
                 </div>
               </div>
             </div>
           </div>
-          <button className="flex justify-center underline mt-8 w-full">Afficher les commentaires</button>
+          <button className="flex justify-center underline mt-8 w-full">
+            Afficher les commentaires
+          </button>
         </div>
       </div>
     </>
