@@ -88,6 +88,7 @@ nav .nav_item:after{
 .rmdp-day, .rmdp-week-day{
     height: 50px !important;
 }
+
 .rmdp-range{
     background: #F8F5EE !important;
     color: #000 !important;
@@ -185,7 +186,17 @@ nav .nav_item:after{
     }
 }
 
+@media (min-width:1520px) {
+    .rmdp-day, .rmdp-week-day{
+        height: 60px !important;
+    } 
+}
 
+@media (min-width:1024px) and (max-width:1282px) {
+    .rmdp-day, .rmdp-week-day{
+        height: 40px !important;
+    } 
+}
 
 progress {
     border-radius: 7px; 
