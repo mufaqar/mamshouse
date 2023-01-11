@@ -13,26 +13,26 @@ import { Feature } from "../../public/mock.data/feature";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { calculateDays, startEndDate } from "../../src/store/features/BookingTabSlice/TotalBookingDays";
-
-
+import {
+  calculateDays,
+  startEndDate,
+} from "../../src/store/features/BookingTabSlice/TotalBookingDays";
 
 const Slug = () => {
-
   const [shortInfo, setShortInfo] = useState(false);
-  const [open, setOpen] = useState(false)
-  const getTotalDays = useSelector((state)=>state.TotalBookingDays.days)
-  const [days, setDays] = useState(getTotalDays)
+  const [open, setOpen] = useState(false);
+  const getTotalDays = useSelector((state) => state.TotalBookingDays.days);
+  const [days, setDays] = useState(getTotalDays);
 
   const dispatch = useDispatch();
 
-  const renderState = (daysProps) =>{
-    setDays(daysProps)
-  }
+  const renderState = (daysProps) => {
+    setDays(daysProps);
+  };
 
-  const handleBooking =()=>{
+  const handleBooking = () => {
     
-  }
+  };
 
   return (
     <>
@@ -124,8 +124,12 @@ const Slug = () => {
             </div>
             <div className="md:h-[50%] pt-6 p-6">
               <h6 className=" text-xl">
-                <strong className="text-4xl font-semibold">{ days === 1 ? '145' : days*145} €</strong>
-                <sub className="ml-1">{days === 1 ? 'par nuit' : `${days} units`} </sub>
+                <strong className="text-4xl font-semibold">
+                  {days === 1 ? "145" : days * 145} €
+                </strong>
+                <sub className="ml-1">
+                  {days === 1 ? "par nuit" : `${days} units`}{" "}
+                </sub>
               </h6>
               <div className="mt-6 border-b-2 border-gray-200 pb-4">
                 <h5 className="font-bold text-[22px]">Arrivée</h5>
@@ -139,7 +143,10 @@ const Slug = () => {
                   Quand voulez vous partir ?
                 </p>
               </div>
-              <button onClick={handleBooking} className="border w-full p-2 mt-4 border-black rounded-full text-base font-semibold hover:bg-black hover:text-white">
+              <button
+                onClick={handleBooking}
+                className="border w-full p-2 mt-4 border-black rounded-full text-base font-semibold hover:bg-black hover:text-white"
+              >
                 réserver maintenant
               </button>
               <h6
@@ -152,60 +159,67 @@ const Slug = () => {
           </div>
         </div>
       </section>
-      {open && <ResidenceOrder renderState={renderState}/>}
+      {open && <ResidenceOrder renderState={renderState} />}
     </>
   );
 };
 
 export default Slug;
 
+const ResidenceOrder = ({ renderState }) => {
+  const dispatch = useDispatch();
+  const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."];
+  const [values, setValues] = useState([new DateObject()]);
 
+  var getStartDate = moment(
+    `${values[0].year}/${values[0].month.number}/${values[0].day}`
+  );
+  let getEndDate = moment(
+    values.length >= "2" &&
+      `${values[1].year}/${values[1].month.number}/${values[1].day}`
+  );
+  var totalDays = getEndDate.diff(getStartDate, "days");
 
-
-
-const ResidenceOrder = ({renderState}) => {
-
-  const dispatch = useDispatch()
-  const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."]
-  const [values, setValues] = useState([ new DateObject() ])
- 
-
-  var getStartDate = moment(`${values[0].year}/${values[0].month.number}/${values[0].day}`);
-  let getEndDate = moment(values.length >= '2' && `${values[1].year}/${values[1].month.number}/${values[1].day}`);
-  var totalDays = getEndDate.diff(getStartDate, "days")
-
-  useEffect(()=>{
-    getEndDate._isValid && dispatch(calculateDays(totalDays))
-    dispatch(startEndDate({
-      startDate : `${values[0].year}/${values[0].month.number}/${values[0].day}`,
-      endDate: getEndDate._isValid ? `${values[1].year}/${values[1].month.number}/${values[1].day}` : `${values[0].year}/${values[0].month.number}/${values[0].day}`
-    }))
-    getEndDate._isValid ? renderState(totalDays+1) : renderState(1)
-  },[values])
+  useEffect(() => {
+    getEndDate._isValid && dispatch(calculateDays(totalDays));
+    dispatch(
+      startEndDate({
+        startDate: `${values[0].year}/${values[0].month.number}/${values[0].day}`,
+        endDate: getEndDate._isValid
+          ? `${values[1].year}/${values[1].month.number}/${values[1].day}`
+          : `${values[0].year}/${values[0].month.number}/${values[0].day}`,
+      })
+    );
+    getEndDate._isValid ? renderState(totalDays + 1) : renderState(1);
+  }, [values]);
 
   return (
     <>
       <div className="container p-4 md:pl-0 md:pr-0 md:pb-0 mx-auto mb-10 md:grid md:grid-cols-5 pt-3 gap-4">
         <div className="pl-0 col-span-3 md:border-r-2 border-gray-200 md:px-4">
           <h6 className="font-medium text-xl mt-4">
-            {getEndDate._isValid ? totalDays+1 : 1} nuits à <strong>Poppengine</strong>
+            {getEndDate._isValid ? totalDays + 1 : 1} nuits à{" "}
+            <strong>Poppengine</strong>
           </h6>
           <p className="text-sm mt-1 text-gray-700">
-            {values[0].weekDay. shortName}. {values[0].day} {values[0].month.name} -  {getEndDate._isValid && values[1].weekDay. shortName}. {getEndDate._isValid && values[1].day} {getEndDate._isValid && values[1].month.name}
+            {values[0].weekDay.shortName}. {values[0].day}{" "}
+            {values[0].month.name} -{" "}
+            {getEndDate._isValid && values[1].weekDay.shortName}.{" "}
+            {getEndDate._isValid && values[1].day}{" "}
+            {getEndDate._isValid && values[1].month.name}
           </p>
           <Calendar
             value={values}
             onChange={setValues}
-            onClick={()=>alert('111')}
+            onClick={() => alert("111")}
             range
             multiple
             numberOfMonths={2}
             showOtherDays
             className="_calendar"
             weekDays={weekDays}
-         
           />
-           <div>
+          <div>
             <button className="text-sm font-normal underline flex justify-end w-full pr-7 mt-4 leading-8">
               Effacer la sélection
             </button>

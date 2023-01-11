@@ -18,7 +18,6 @@ export default function Home({ booking }) {
         <Filter />
       </section>
       <section className="md:mt-12 mt-6 mb-20">
-        {' '}
         <HomeCard />
       </section>
     </>
