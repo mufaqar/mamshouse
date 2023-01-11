@@ -12,7 +12,6 @@ import { DateObject } from "react-multi-date-picker";
 import { Feature } from "../../public/mock.data/feature";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { changeOpenState } from "../../src/store/features/BookingTabSlice/openBookingTabSlice";
 import moment from "moment";
 import { calculateDays, startEndDate } from "../../src/store/features/BookingTabSlice/TotalBookingDays";
 
@@ -21,7 +20,7 @@ import { calculateDays, startEndDate } from "../../src/store/features/BookingTab
 const Slug = () => {
 
   const [shortInfo, setShortInfo] = useState(false);
-  const openBookingTab = useSelector((state) => state.openBookingTab.open);
+  const [open, setOpen] = useState(false)
   const getTotalDays = useSelector((state)=>state.TotalBookingDays.days)
   const [days, setDays] = useState(getTotalDays)
 
@@ -145,15 +144,15 @@ const Slug = () => {
               </button>
               <h6
                 className="text-sm font-semibold mt-4 text-center underline cursor-pointer"
-                onClick={() => dispatch(changeOpenState())}
+                onClick={() => setOpen(!open)}
               >
-                {openBookingTab ? "-" : "+"} de détails
+                {open ? "-" : "+"} de détails
               </h6>
             </div>
           </div>
         </div>
       </section>
-      {openBookingTab && <ResidenceOrder renderState={renderState}/>}
+      {open && <ResidenceOrder renderState={renderState}/>}
     </>
   );
 };
