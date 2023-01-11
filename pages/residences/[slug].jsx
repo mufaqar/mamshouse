@@ -14,6 +14,7 @@ import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { changeOpenState } from "../../src/store/features/BookingTabSlice/openBookingTabSlice";
 import moment from "moment";
+import { calculateDays } from "../../src/store/features/BookingTabSlice/TotalBookingDays";
 
 
 
@@ -152,25 +153,22 @@ export default Slug;
 
 
 const ResidenceOrder = () => {
-  const [values, setValues] = useState([
-    new DateObject().setDay(4).subtract(0, "month"),
-    new DateObject().setDay(4).add(0, "month"),
-  ]);
-   
 
-  const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."]
-  const [endDate, setEndDate] = useState({});
-  var start = moment(`${values[0].year}/${values[0].month.number}/${values[0].day}`);
-  var end = moment(endDate.dateFocused?.format?.());
-  var total = end.diff(start, "days")
   const dispatch = useDispatch()
-  console.log("🚀 total", total)
-
-  // console.log("🚀 endDate", endDate.dateFocused?.format?.()) 
+  const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."]
+  const [values, setValues] = useState([ new DateObject() ])
+ 
+  var getStartDate = moment(`${values[0].year}/${values[0].month.number}/${values[0].day}`);
+  let getEndDate = moment(values.length >= '2' && `${values[1].year}/${values[1].month.number}/${values[1].day}`);
+ 
+  var totalDays = getEndDate.diff(getStartDate, "days")
+  console.log("🚀 getStartDate", getStartDate)
+  console.log("🚀 getEndDate", getEndDate)
+ 
 
   useEffect(()=>{
-
-  },[endDate, values])
+    // dispatch(calculateDays(total))
+  },[values])
 
   return (
     <>
@@ -192,9 +190,7 @@ const ResidenceOrder = () => {
             showOtherDays
             className="_calendar"
             weekDays={weekDays}
-            onFocusedDateChange={(dateFocused, dateClicked) => {
-              setEndDate({ dateFocused, dateClicked });
-            }}
+         
           />
            <div>
             <button className="text-sm font-normal underline flex justify-end w-full pr-7 mt-4 leading-8">
