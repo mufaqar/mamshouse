@@ -126,7 +126,7 @@ const Slug = () => {
             <div className="md:h-[50%] pt-6 p-6">
               <h6 className=" text-xl">
                 <strong className="text-4xl font-semibold">{ days === 1 ? '145' : days*145} €</strong>
-                <sub className="ml-1">{days === 1 ? 'par nuit' : `${days} unit`} </sub>
+                <sub className="ml-1">{days === 1 ? 'par nuit' : `${days} units`} </sub>
               </h6>
               <div className="mt-6 border-b-2 border-gray-200 pb-4">
                 <h5 className="font-bold text-[22px]">Arrivée</h5>
