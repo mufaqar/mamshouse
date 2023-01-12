@@ -31,15 +31,3 @@ export default function Home({ activities }) {
 
 
 
-
-
-export async function getStaticProps(context) {
-  console.log("🚀 ~ context", context)
-
-
-  return {
-    props: {
-
-    },
-  };
-}
