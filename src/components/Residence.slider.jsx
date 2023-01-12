@@ -57,6 +57,7 @@ export default function ResidenceSlider({residencesData}) {
     centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
+    arrows: false,
     responsive: [
       {
         breakpoint: 1024,
