@@ -9,7 +9,6 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const { pathname } = router;
-  console.log('🚀 ~ file: Header.jsx:12 ~ Header ~ pathname', pathname);
 
   return (
     <header className="absolute top-0 right-0 w-full shadow-sm z-10 bg-white">

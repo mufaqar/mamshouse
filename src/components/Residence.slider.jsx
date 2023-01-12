@@ -12,30 +12,32 @@ import { residence } from "../../public/mock.data/mockdata";
 
 
 const SliderCard = ({item}) => {
-  const {id} = item
+  const { _id } = item
 
   return (
     <>
       <div className="p-2 mt-2 ">
         <div className="relative">
           <Image
-            src={heroCard }
+            src={item.feature_poster?.asset.url}
             alt="hero card"
-            className="w-full h-full min-h-[500px] rounded-[20px]"
+            width={500}
+            height={550}  
+            className="w-full h-full h-[550px] rounded-[20px]"
           />
-          <div className="absolute flex flex-col justify-end top-0 text-white w-full rounded-[20px] h-full p-3 px-5">
+          <div className="absolute flex flex-col justify-end top-0 text-white w-full rounded-[20px] h-[550px] p-3 px-5">
             <div className="flex justify-between items-center">
               <div>
                 <p>
-                  {item.location}
+                  {item?.location}
                 </p>
-                <Link href={`residences/${item.slug}`}>
+                <Link href={`residences/${item.slug.current}`}>
                   <h2 className="font-bangla-mn sub-heading text-3xl mt-2">
                     {item.title}
                   </h2>
                 </Link>
               </div>
-              <Link href={`residences/${item.slug}`} className="hover:-mr-2 transition-all ease-linear">
+              <Link href={`residences/${item.slug.current}`} className="hover:-mr-2 transition-all ease-linear">
                 <HiArrowNarrowRight size={30} />
               </Link>
             </div>
@@ -46,7 +48,8 @@ const SliderCard = ({item}) => {
   );
 };
 
-export default function ResidenceSlider() {
+export default function ResidenceSlider({residencesData}) {
+  console.log("🚀 ~ file: Residence.slider.jsx:50 ~ ResidenceSlider ~ residencesData", residencesData)
   const settings = {
     className: "center",
     centerMode: true,
@@ -58,7 +61,7 @@ export default function ResidenceSlider() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -67,8 +70,8 @@ export default function ResidenceSlider() {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           initialSlide: 1,
         },
       },
@@ -88,7 +91,7 @@ export default function ResidenceSlider() {
       <div className="relative">
         <Slider {...settings}>
           {
-            residence.map((item, i) => (
+            residencesData.map((item, i) => (
             <SliderCard item={item} key={i}/>
           ))
         }

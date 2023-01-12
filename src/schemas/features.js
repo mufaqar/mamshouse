@@ -6,7 +6,19 @@ export default {
     {
       name: "title",
       title: "Title",
-      type: "string",
+      type: "object",
+      fields: [
+        {
+          title: "English",
+          name: "en",
+          type: "string",
+        },
+        {
+          title: "French",
+          name: "fr",
+          type: "string",
+        },
+      ],
     },
     {
       name: "icon",
