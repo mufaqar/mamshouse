@@ -23,7 +23,7 @@ const SliderCard = ({item}) => {
             alt="hero card"
             width={500}
             height={550}  
-            className="w-full h-full h-[550px] rounded-[20px]"
+            className="w-full h-[550px] rounded-[20px]"
           />
           <div className="absolute flex flex-col justify-end top-0 text-white w-full rounded-[20px] h-[550px] p-3 px-5">
             <div className="flex justify-between items-center">

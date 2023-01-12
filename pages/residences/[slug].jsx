@@ -17,11 +17,14 @@ import {
   calculateDays,
   startEndDate,
 } from "../../src/store/features/BookingTabSlice/TotalBookingDays";
+import { sanityClient } from "../../src/config/sanityClient";
 
-const Slug = () => {
+const Slug = ({data}) => {
+  console.log("🚀 ~ file: [slug].jsx:23 ~ Slug ~ data", data)
+
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);
-  console.log("🚀 ~ file: [slug].jsx:24 ~ Slug ~ open", open)
+
   const getTotalDays = useSelector((state) => state.TotalBookingDays.days);
   const [days, setDays] = useState(getTotalDays);
 
@@ -43,14 +46,14 @@ const Slug = () => {
     window.addEventListener("resize", handleResize);
   });
 
-  const handleBooking = () => {};
+  const handleBooking = () => { };
 
   return (
     <>
       <PageBanner
-        src={ResidenceBannerImage}
-        heading=" Les Residences"
-        info="Lorem ipsum dolor sit amet consectetur. In ipsum ac in posuere cursus in cursus eleifend. Nisi in dolor aliquet nunc quis tortor. Fusce at enim et amet viverra. Dui suspendisse scelerisque justo ultrices in convallis orci id. Purus at elit nulla pretium neque purus eget."
+        srcUrl={data.feature_banner?.asset?.url}
+        heading="Les Residences"
+        info={data?.short_info}
         pageType="residence"
       />
       <section className="mt-9 container mx-auto p-2 md:p-0 mb-5">
@@ -61,28 +64,29 @@ const Slug = () => {
           </h1>
         </Link>
         <h1 className="sub-heading font-bangla-mn capitalize">
-          Nos Résidences
+          {data.title}
         </h1>
         {/* Gallery */}
         <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mt-3 ">
           {/* 1 */}
           <div className="relative max-h-[700px] col-span-2">
             <Image
-              src={One}
-              alt=""
+              src={data.gallery[0]?.asset?.url}
+              alt={data.title}
+              width={500}
+              height={500}
               className="w-full h-full object-cover _shadow rounded-3xl"
             />
             <div
-              className={`absolute top-0 p-6 ${
-                shortInfo && "backdrop-blur-md"
-              } rounded-3xl h-full `}
+              className={`absolute top-0 p-6 ${shortInfo && "backdrop-blur-md"
+                } rounded-3xl h-full `}
             >
               {!shortInfo ? (
                 <button
                   className="text-xl font-semibold text-white flex item-center"
                   onClick={() => setShortInfo(true)}
                 >
-                  Afficher la description{" "}
+                  Afficher la description
                   <MdOutlineKeyboardArrowDown size={30} />
                 </button>
               ) : (
@@ -94,15 +98,7 @@ const Slug = () => {
               )}
               {shortInfo && (
                 <p className="font-normal p-4 md:p-10 text-xl text-white h-full overflow-x-scroll lg:overflow-hidden">
-                  Lorem ipsum dolor sit amet consectetur. Nullam pharetra nunc
-                  id vitae sed pellentesque nibh non sed. Sed amet laoreet diam
-                  interdum nunc facilisi egestas. Mi convallis volutpat sed
-                  ultrices suspendisse ultrices. Feugiat augue consectetur eu
-                  blandit ac. Neque nulla in mattis gravida pretium iaculis
-                  vulputate. Feugiat in sapien in eu. Pretium nibh urna vel
-                  molestie porttitor suspendisse orci pellentesque in. Platea
-                  quis orci urna semper hendrerit. Lacus aenean a faucibus
-                  lorem. Quis elit euismod maecenas mi id.
+                  {data.description}
                 </p>
               )}
             </div>
@@ -111,15 +107,19 @@ const Slug = () => {
           <div className="md:max-h-[700px] col-span-2 md:col-span-1">
             <div className="h-[40%]">
               <Image
-                src={Two}
-                alt=""
+                src={data.gallery[1]?.asset?.url}
+                alt={data.title}
+                width={500}
+                height={500}
                 className="w-full h-full _shadow object-cover rounded-3xl"
               />
             </div>
             <div className="h-[60%] pt-4 md:pt-6">
               <Image
-                src={Three}
-                alt=""
+              src={data.gallery[2]?.asset?.url}
+              alt={data.title}
+              width={500}
+              height={500}
                 className="w-full h-full _shadow object-cover rounded-3xl"
               />
             </div>
@@ -128,15 +128,17 @@ const Slug = () => {
           <div className="col-span-2 md:col-span-3 lg:col-span-2 md:max-h-[700px]">
             <div className="md:h-[50%]">
               <Image
-                src={Four}
-                alt=""
+              src={data.gallery[3]?.asset?.url}
+              alt={data.title}
+              width={500}
+              height={500}
                 className="w-full h-full _shadow object-cover rounded-3xl"
               />
             </div>
             <div className="md:h-[50%] pt-6 p-6">
               <h6 className=" text-xl">
                 <strong className="text-4xl font-semibold">
-                  {days === 1 ? "145" : days * 145} €
+                  {days === 1 ? data?.price_per_unit : days * data?.price_per_unit} €
                 </strong>
                 <sub className="ml-1">
                   {days === 1 ? "par nuit" : `${days} units`}{" "}
@@ -170,14 +172,14 @@ const Slug = () => {
           </div>
         </div>
       </section>
-      {open && <ResidenceOrder renderState={renderState} />}
+      {open && <ResidenceOrder renderState={renderState} features={data.features} />}
     </>
   );
 };
 
 export default Slug;
 
-const ResidenceOrder = ({ renderState }) => {
+const ResidenceOrder = ({ renderState, features }) => {
   const dispatch = useDispatch();
   const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."];
   const [values, setValues] = useState([new DateObject()]);
@@ -187,7 +189,7 @@ const ResidenceOrder = ({ renderState }) => {
   );
   let getEndDate = moment(
     values.length >= "2" &&
-      `${values[1].year}/${values[1].month.number}/${values[1].day}`
+    `${values[1].year}/${values[1].month.number}/${values[1].day}`
   );
   var totalDays = getEndDate.diff(getStartDate, "days");
 
@@ -241,14 +243,14 @@ const ResidenceOrder = ({ renderState }) => {
             À propos de ce logement
           </h3>
           <ul className="mt-5">
-            {Feature.map((item, i) => {
+            {features.map((item, i) => {
               return (
                 <li
                   key={i}
                   className="flex mb-7 justify-start gap-4 items-center"
                 >
                   <Image
-                    src={item.icon.src}
+                    src={item.icon.asset.url}
                     alt={item.title}
                     width={20}
                     height={20}
@@ -322,3 +324,63 @@ const ResidenceOrder = ({ renderState }) => {
     </>
   );
 };
+
+const projectSlugQuery = `*[_type == "residences" && slug.current == $slug][0]{
+  _id,
+  "title": title[$locale],
+  "location": location[$locale], 
+  slug,
+  feature_poster{
+    asset->{
+      url
+    }
+  },
+  feature_banner{
+    asset->{
+      url
+    }
+  },
+  "short_info" : short_info[$locale],
+  gallery[]{
+    asset->{
+      url
+    }
+  },
+  price_per_unit,
+  "description" : description[$locale],
+  features[]{
+    "title" : title[$locale],
+    icon{
+      asset->{
+        url
+      }
+    }
+  }
+}`;
+
+
+export async function getStaticPaths() {
+  const paths = await sanityClient.fetch(`
+  *[_type == "residences" && defined(slug.current)]{
+       "params": {
+         "slug" : slug.current
+       }
+     }
+  `);
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps(context) {
+  const { slug } = context.params;
+  const locale = context.locale;
+  const project = await sanityClient.fetch(projectSlugQuery, { slug, locale });
+  return {
+    props: {
+      data: project ,
+      preview: true,
+    },
+  };
+}

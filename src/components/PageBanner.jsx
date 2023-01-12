@@ -10,15 +10,17 @@ import { BsEnvelope,BsTelephone } from "react-icons/bs";
 
 export default function PageBanner({
   src,
+  srcUrl,
   subHeading,
   heading,
   info,
   pageType,
 }) {
+  
   return (
     <main
       className="md:h-screen h-[700px] w-full PageBanner"
-      style={{ background: `url(${src.src})` }}
+      style={{ background: `url(${srcUrl ? srcUrl : src.src})` }}
     >
       <div className="flex flex-col justify-center items-center h-full ">
         <div
