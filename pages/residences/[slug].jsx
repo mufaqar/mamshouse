@@ -21,6 +21,7 @@ import {
 const Slug = () => {
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);
+  console.log("🚀 ~ file: [slug].jsx:24 ~ Slug ~ open", open)
   const getTotalDays = useSelector((state) => state.TotalBookingDays.days);
   const [days, setDays] = useState(getTotalDays);
 
@@ -30,9 +31,19 @@ const Slug = () => {
     setDays(daysProps);
   };
 
-  const handleBooking = () => {
-    
+  const handleResize = () => {
+    if (window.innerWidth > 768) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
   };
+  // create an event listener
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  });
+
+  const handleBooking = () => {};
 
   return (
     <>

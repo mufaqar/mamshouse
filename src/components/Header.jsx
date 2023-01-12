@@ -12,7 +12,7 @@ export default function Header() {
   console.log('🚀 ~ file: Header.jsx:12 ~ Header ~ pathname', pathname);
 
   return (
-    <header className="absolute top-0 right-0 w-full shadow-sm bg-white">
+    <header className="absolute top-0 right-0 w-full shadow-sm z-10 bg-white">
       <div className="flex justify-between px-2 md:px-8 items-center h-16 bg-white">
         {/* logo */}
         <div>
