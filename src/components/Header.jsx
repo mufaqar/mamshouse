@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { FaInstagram } from 'react-icons/fa';
-import { FiMenu } from 'react-icons/fi';
-import { GrClose } from 'react-icons/gr';
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { FaInstagram } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi";
+import { GrClose } from "react-icons/gr";
 
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
@@ -21,39 +21,45 @@ export default function Header() {
             </h1>
           </Link>
         </div>
-        <nav className={`md:block ${isMobile ? 'block' : 'hidden'}`}>
+        <nav className={`md:block ${isMobile ? "block" : "hidden"}`}>
           <ul
             className={`flex font-semibold text-sm gap-20 items-center ${
               isMobile &&
-              'bg-white shadow-sm p-8 gap-8 absolute top-16 z-10 w-full left-0 flex-col'
+              "bg-white shadow-sm p-8 gap-8 absolute top-16 z-10 w-full left-0 flex-col"
             }`}
           >
             <li
               className={`cursor-pointer ${
-                pathname === '/residences' && 'nav_item'
+                pathname === "/residences" && "nav_item"
               }`}
             >
               <Link href="/residences">Résidences</Link>
             </li>
             <li
               className={`cursor-pointer ${
-                pathname === '/activities' && 'nav_item'
+                pathname === "/activities" && "nav_item"
               }`}
             >
               <Link href="/activities">Activités</Link>
             </li>
             <li
               className={`cursor-pointer ${
-                pathname === '/contact' && 'nav_item'
+                pathname === "/contact" && "nav_item"
               }`}
             >
               <Link href="/contact">Contact</Link>
             </li>
-            <li className={`ml-6 cursor-pointer text-lg ${isMobile && 'ml-0'}`}>
+            <li className={`ml-6 cursor-pointer text-lg ${isMobile && "ml-0"}`}>
               <Link href="#">
                 <FaInstagram />
               </Link>
             </li>
+            <Link href="/fr" locale='fr'>
+              FR
+            </Link> |
+            <Link href="/en" locale='en'>
+              EN
+            </Link>
           </ul>
         </nav>
         {/* hamburger */}
