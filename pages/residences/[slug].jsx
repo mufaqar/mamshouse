@@ -20,7 +20,6 @@ import {
 import { sanityClient } from "../../src/config/sanityClient";
 
 const Slug = ({data}) => {
-  console.log("🚀 ~ file: [slug].jsx:23 ~ Slug ~ data", data)
 
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);

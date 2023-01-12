@@ -9,6 +9,7 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const { pathname } = router;
+ 
 
   return (
     <header className="absolute top-0 right-0 w-full shadow-sm z-10 bg-white">
@@ -54,12 +55,14 @@ export default function Header() {
                 <FaInstagram />
               </Link>
             </li>
-            <Link href="/fr" locale='fr'>
-              FR
-            </Link> |
-            <Link href="/en" locale='en'>
-              EN
-            </Link>
+            <div className="flex gap-4">
+              <Link href="/fr" locale='fr' className="hover:underline">
+                FR
+              </Link> |
+              <Link href="/en" locale='en' className="hover:underline">
+                EN
+              </Link>
+            </div>
           </ul>
         </nav>
         {/* hamburger */}

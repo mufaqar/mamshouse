@@ -17,6 +17,11 @@
     }
 }
 
+*{
+    box-sizing: border-box;
+    background: rgba(0 100 0 / 0.1) !important;
+}
+
 @font-face {
     font-family: Bangla_MN;
     src: url('../public/fonts/Bangla_MN.ttf');
