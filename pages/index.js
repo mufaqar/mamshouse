@@ -2,9 +2,13 @@ import Head from 'next/head';
 // import { Inter } from "@next/font/google";
 import { sanityClient } from '../src/config/sanityClient';
 import { Filter, HomeCard, Main } from '../src/components';
+import { useRouter } from 'next/router';
 
 // const inter = Inter({ subsets: ["latin"] });
-export default function Home({ booking }) {
+export default function Home({ activities }) {
+  const router = useRouter()
+  console.log("🚀 ~ activities", activities)
+      
   return (
     <>
       <Head>
@@ -20,23 +24,22 @@ export default function Home({ booking }) {
       <section className="md:mt-12 mt-6 mb-20">
         <HomeCard />
       </section>
+
     </>
   );
 }
 
-export async function getServerSideProps(pageContext) {
-  const locale = pageContext.locale;
-  const booking = await sanityClient.fetch(
-    `*[_type == "booking"]{
-    "title": title[$locale],
-    _id
-  }`,
-    { locale }
-  );
+
+
+
+
+export async function getStaticProps(context) {
+  console.log("🚀 ~ context", context)
+
 
   return {
     props: {
-      booking,
+
     },
   };
 }

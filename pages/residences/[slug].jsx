@@ -1,15 +1,12 @@
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import ResidenceBannerImage from "../../public/images/residence-banner.png";
+import React, { useEffect, useState } from "react";
 import { PageBanner } from "../../src/components";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import Image from "next/image";
-import { One, Two, Three, Four } from "../../public";
 import { Calendar } from "react-multi-date-picker";
 import { DateObject } from "react-multi-date-picker";
-import { Feature } from "../../public/mock.data/feature";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
@@ -18,6 +15,8 @@ import {
   startEndDate,
 } from "../../src/store/features/BookingTabSlice/TotalBookingDays";
 import { sanityClient } from "../../src/config/sanityClient";
+import { useRouter } from "next/router";
+
 
 const Slug = ({data}) => {
 
@@ -359,10 +358,11 @@ const projectSlugQuery = `*[_type == "residences" && slug.current == $slug][0]{
 
 
 export async function getStaticPaths() {
+
   const paths = await sanityClient.fetch(`
   *[_type == "residences" && defined(slug.current)]{
        "params": {
-         "slug" : slug.current
+         "slug" : slug.current,
        }
      }
   `);
@@ -373,8 +373,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
+
   const { slug } = context.params;
-  const locale = context.locale;
+  // const locale = context.locale;
+  const locale = 'en';
   const project = await sanityClient.fetch(projectSlugQuery, { slug, locale });
   return {
     props: {

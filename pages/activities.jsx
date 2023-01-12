@@ -44,7 +44,7 @@ export default function Activities({activities}) {
 
 
 export async function getServerSideProps(pageContext) {
-  const locale = pageContext.locale;
+  const locale = pageContext.query.lang || 'en';
   const activities = await sanityClient.fetch(
     `*[_type == "activities"]{
         _id,

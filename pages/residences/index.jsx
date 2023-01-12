@@ -19,7 +19,7 @@ export default function Residences({ residences }) {
 }
 
 export async function getServerSideProps(pageContext) {
-  const locale = pageContext.locale;
+  const locale = pageContext.query.lang || 'en';
   const residences = await sanityClient.fetch(
     `*[_type == "residences"]{
         _id,
