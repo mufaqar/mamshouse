@@ -4,7 +4,6 @@ import { sanityClient } from "../../src/config/sanityClient";
 
 export default async function handler(req, res) {
   const {id, lang} = req.body
-  console.log('req.body', req.body)
   const paths = await sanityClient.fetch(`
   *[_type == "residences" && slug.current == $id]{
        _id,
