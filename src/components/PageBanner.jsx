@@ -1,7 +1,5 @@
-import Image from "next/image";
 import React from "react";
 import { HiOutlineArrowSmRight } from "react-icons/hi";
-import { FiMenu } from "react-icons/fi";
 import Link from "next/link";
 import { IoLogoInstagram } from "react-icons/io";
 import { BsEnvelope,BsTelephone } from "react-icons/bs";
