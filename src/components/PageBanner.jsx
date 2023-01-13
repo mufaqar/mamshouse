@@ -20,7 +20,7 @@ export default function PageBanner({
   return (
     <main
       className="md:h-screen h-[700px] w-full PageBanner"
-      style={{ background: `url(${srcUrl ? srcUrl : src.src})` }}
+      style={{ background: `url(${srcUrl ? srcUrl : src?.src})` }}
     >
       <div className="flex flex-col justify-center items-center h-full ">
         <div

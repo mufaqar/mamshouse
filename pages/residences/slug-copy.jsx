@@ -16,15 +16,10 @@ import {
 } from "../../src/store/features/BookingTabSlice/TotalBookingDays";
 import { sanityClient } from "../../src/config/sanityClient";
 import { useRouter } from "next/router";
-import axios from "axios";
 
-const Slug = () => {
-  const router = useRouter();
-  const id = router.query.slug;
-  const lang = router.query.lang || "en";
 
-  const [data, setData] = useState();
-  console.log("🚀 ~ file: [slug].jsx:28 ~ Slug ~ data", data);
+const Slug = ({data}) => {
+
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -49,26 +44,12 @@ const Slug = () => {
     window.addEventListener("resize", handleResize);
   });
 
-  useEffect(() => {
-    async function getSinglePost() {
-      await axios
-        .post("/api/getsinglepost", { id, lang })
-        .then(function (response) {
-          setData(response.data[0]);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-    getSinglePost();
-  });
-
-  const handleBooking = () => {};
+  const handleBooking = () => { };
 
   return (
     <>
-        <PageBanner
-        srcUrl={data?.feature_banner?.asset?.url}
+      <PageBanner
+        srcUrl={data.feature_banner?.asset?.url}
         heading="Les Residences"
         info={data?.short_info}
         pageType="residence"
@@ -80,22 +61,23 @@ const Slug = () => {
             Résidences
           </h1>
         </Link>
-        <h1 className="sub-heading font-bangla-mn capitalize">{data?.title}</h1>
+        <h1 className="sub-heading font-bangla-mn capitalize">
+          {data.title}
+        </h1>
         {/* Gallery */}
         <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mt-3 ">
           {/* 1 */}
           <div className="relative max-h-[700px] col-span-2">
             <Image
-              src={data?.gallery[0]?.asset?.url}
-              alt={data?.title}
+              src={data.gallery[0]?.asset?.url}
+              alt={data.title}
               width={500}
               height={500}
               className="w-full h-full object-cover _shadow rounded-3xl"
             />
             <div
-              className={`absolute top-0 p-6 ${
-                shortInfo && "backdrop-blur-md"
-              } rounded-3xl h-full `}
+              className={`absolute top-0 p-6 ${shortInfo && "backdrop-blur-md"
+                } rounded-3xl h-full `}
             >
               {!shortInfo ? (
                 <button
@@ -114,7 +96,7 @@ const Slug = () => {
               )}
               {shortInfo && (
                 <p className="font-normal p-4 md:p-10 text-xl text-white h-full overflow-x-scroll lg:overflow-hidden">
-                  {data?.description}
+                  {data.description}
                 </p>
               )}
             </div>
@@ -123,8 +105,8 @@ const Slug = () => {
           <div className="md:max-h-[700px] col-span-2 md:col-span-1">
             <div className="h-[40%]">
               <Image
-                src={data?.gallery[1]?.asset?.url}
-                alt={data?.title}
+                src={data.gallery[1]?.asset?.url}
+                alt={data.title}
                 width={500}
                 height={500}
                 className="w-full h-full _shadow object-cover rounded-3xl"
@@ -132,10 +114,10 @@ const Slug = () => {
             </div>
             <div className="h-[60%] pt-4 md:pt-6">
               <Image
-                src={data?.gallery[2]?.asset?.url}
-                alt={data?.title}
-                width={500}
-                height={500}
+              src={data.gallery[2]?.asset?.url}
+              alt={data.title}
+              width={500}
+              height={500}
                 className="w-full h-full _shadow object-cover rounded-3xl"
               />
             </div>
@@ -144,20 +126,17 @@ const Slug = () => {
           <div className="col-span-2 md:col-span-3 lg:col-span-2 md:max-h-[700px]">
             <div className="md:h-[50%]">
               <Image
-                src={data?.gallery[3]?.asset?.url}
-                alt={data?.title}
-                width={500}
-                height={500}
+              src={data.gallery[3]?.asset?.url}
+              alt={data.title}
+              width={500}
+              height={500}
                 className="w-full h-full _shadow object-cover rounded-3xl"
               />
             </div>
             <div className="md:h-[50%] pt-6 p-6">
               <h6 className=" text-xl">
                 <strong className="text-4xl font-semibold">
-                  {days === 1
-                    ? data?.price_per_unit
-                    : days * data?.price_per_unit}{" "}
-                  €
+                  {days === 1 ? data?.price_per_unit : days * data?.price_per_unit} €
                 </strong>
                 <sub className="ml-1">
                   {days === 1 ? "par nuit" : `${days} units`}{" "}
@@ -191,9 +170,7 @@ const Slug = () => {
           </div>
         </div>
       </section>
-      {open && (
-        <ResidenceOrder renderState={renderState} features={data?.features} />
-      )}
+      {open && <ResidenceOrder renderState={renderState} features={data.features} />}
     </>
   );
 };
@@ -210,7 +187,7 @@ const ResidenceOrder = ({ renderState, features }) => {
   );
   let getEndDate = moment(
     values.length >= "2" &&
-      `${values[1].year}/${values[1].month.number}/${values[1].day}`
+    `${values[1].year}/${values[1].month.number}/${values[1].day}`
   );
   var totalDays = getEndDate.diff(getStartDate, "days");
 
@@ -345,3 +322,66 @@ const ResidenceOrder = ({ renderState, features }) => {
     </>
   );
 };
+
+const projectSlugQuery = `*[_type == "residences" && slug.current == $slug][0]{
+  _id,
+  "title": title[$locale],
+  "location": location[$locale], 
+  slug,
+  feature_poster{
+    asset->{
+      url
+    }
+  },
+  feature_banner{
+    asset->{
+      url
+    }
+  },
+  "short_info" : short_info[$locale],
+  gallery[]{
+    asset->{
+      url
+    }
+  },
+  price_per_unit,
+  "description" : description[$locale],
+  features[]{
+    "title" : title[$locale],
+    icon{
+      asset->{
+        url
+      }
+    }
+  }
+}`;
+
+
+export async function getStaticPaths() {
+
+  const paths = await sanityClient.fetch(`
+  *[_type == "residences" && defined(slug.current)]{
+       "params": {
+         "slug" : slug.current,
+       }
+     }
+  `);
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps(context) {
+
+  const { slug } = context.params;
+  // const locale = context.locale;
+  const locale = 'en';
+  const project = await sanityClient.fetch(projectSlugQuery, { slug, locale });
+  return {
+    props: {
+      data: project ,
+      preview: true,
+    },
+  };
+}
