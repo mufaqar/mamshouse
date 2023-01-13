@@ -1,3 +1,4 @@
+import { LanguageSwitcher } from "next-export-i18n";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -9,7 +10,6 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const { pathname } = router;
- 
 
   return (
     <header className="absolute top-0 right-0 w-full shadow-sm z-10 bg-white">
@@ -56,12 +56,13 @@ export default function Header() {
               </Link>
             </li>
             <div className="flex gap-4">
-              <Link href="/fr" locale='fr' className="hover:underline">
-                FR
-              </Link> |
-              <Link href="/en" locale='en' className="hover:underline">
-                EN
-              </Link>
+              <LanguageSwitcher lang="fr">
+                <div className="hover:underline">FR</div>
+              </LanguageSwitcher>
+              |
+              <LanguageSwitcher lang="en">
+                <div className="hover:underline">EN</div>
+              </LanguageSwitcher>
             </div>
           </ul>
         </nav>
