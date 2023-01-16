@@ -16,25 +16,44 @@ import {
 } from "../../src/store/features/BookingTabSlice/TotalBookingDays";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const Slug = () => {
   const router = useRouter();
   const id = router.query.slug;
   const lang = router.query.lang || "en";
 
+  const getTotalDays = useSelector((state) => state.TotalBookingDays.days);
+  const getStartDate = useSelector((state) => state.TotalBookingDays.startDate);
+  const getEndDate = useSelector((state) => state.TotalBookingDays.endDate);
+
   const [data, setData] = useState();
   console.log("🚀 ~ file: [slug].jsx:28 ~ Slug ~ data", data);
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const getTotalDays = useSelector((state) => state.TotalBookingDays.days);
+  const [selectDate, setSelectDate] = useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
   const [days, setDays] = useState(getTotalDays);
-
-  const dispatch = useDispatch();
 
   const renderState = (daysProps) => {
     setDays(daysProps);
   };
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  
 
   const handleResize = () => {
     if (window.innerWidth > 768) {
@@ -60,13 +79,45 @@ const Slug = () => {
         });
     }
     getSinglePost();
-  });
+  }, []);
 
-  const handleBooking = () => {};
+
+  const onSubmit = data => {
+    if (getStartDate && getEndDate) {
+      setSelectDate(false);
+      axios
+        .post("/api/createOrder", {
+          title: data.title,
+          getStartDate,
+          getEndDate,
+          totalprice: days * data.price_per_unit,
+          paymentApproved: false,
+          name : data.name,
+          email : data.email,
+          mobile : data.mobile,
+        })
+        .then(function (response) {
+          console.log("response", response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      console.log("123");
+      setSelectDate(true);
+    }
+  };
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   return (
     <>
-        <PageBanner
+      <PageBanner
         srcUrl={data?.feature_banner?.asset?.url}
         heading="Les Residences"
         info={data?.short_info}
@@ -155,11 +206,11 @@ const Slug = () => {
                 <strong className="text-4xl font-semibold">
                   {days === 1
                     ? data?.price_per_unit
-                    : days * data?.price_per_unit}{" "}
+                    : days * data?.price_per_unit}
                   €
                 </strong>
                 <sub className="ml-1">
-                  {days === 1 ? "par nuit" : `${days} units`}{" "}
+                  {days === 1 ? "par nuit" : `${days} units`}
                 </sub>
               </h6>
               <div className="mt-6 border-b-2 border-gray-200 pb-4">
@@ -175,14 +226,29 @@ const Slug = () => {
                 </p>
               </div>
               <button
-                onClick={handleBooking}
-                className="border w-full p-2 mt-4 border-black rounded-full text-base font-semibold hover:bg-black hover:text-white"
+                // onClick={handleBooking}
+                onClick={openModal}
+                className={`border w-full p-2 mt-3 rounded-full text-base font-semibold ${
+                  !selectDate
+                    ? "hover:bg-black cursor-pointer hover:text-white border-black text-black"
+                    : "text-gray-200 cursor-default border-gray-200"
+                } `}
               >
                 réserver maintenant
               </button>
+              {selectDate && (
+                <p className="mt-1 text-sm text-center text-red-500">
+                  Please select date first!
+                </p>
+              )}
               <h6
-                className="text-sm font-semibold mt-4 text-center underline cursor-pointer"
-                onClick={() => setOpen(!open)}
+                className={`text-sm font-semibold ${
+                  selectDate ? "mt-1" : "mt-3"
+                }  mb-4 text-center underline cursor-pointer`}
+                onClick={() => {
+                  setOpen(!open);
+                  setSelectDate(false);
+                }}
               >
                 {open ? "-" : "+"} de détails
               </h6>
@@ -193,6 +259,53 @@ const Slug = () => {
       {open && (
         <ResidenceOrder renderState={renderState} features={data?.features} />
       )}
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+      >
+        <div className="w-[300px] md:w-[500px]">
+          <button onClick={closeModal}>
+            <RxCross2 size={27} />
+          </button>
+          <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex items-center gap-4">
+              <div className="w-1/2">
+                <label className="block font-bangla-mn">Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  {...register("name", { required: true })}
+                  className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
+                />
+                {errors.name && <span className="text-sm text-red-500">This field is required</span>}
+              </div>
+              <div className="w-1/2">
+                <label className="block font-bangla-mn">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  {...register("email", { required: true })}
+                  className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
+                />
+                {errors.email && <span className="text-sm text-red-500">This field is required</span>}
+              </div>
+            </div>
+            <div className="mt-3">
+                <label className="block font-bangla-mn">Mobile Number</label>
+                <input
+                  type="number"
+                  name="mobile"
+                  {...register("mobile", { required: true })}
+                  className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
+                />
+                {errors.mobile && <span className="text-sm text-red-500">This field is required</span>}
+            </div>
+            <input type="submit" value="Submit Order" className="mt-4 main-btn py-2 cursor-pointer"/>
+          </form>
+        </div>
+      </Modal>
     </>
   );
 };
