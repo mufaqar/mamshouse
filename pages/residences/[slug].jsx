@@ -48,12 +48,17 @@ const Slug = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [days, setDays] = useState(getTotalDays);
 
+  const dispatch = useDispatch()
+
   const renderState = (daysProps) => {
     setDays(daysProps);
   };
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handleResize = () => {
     if (window.innerWidth > 768) {
@@ -82,19 +87,45 @@ const Slug = () => {
   }, []);
 
 
-  const onSubmit = data => {
+
+
+  const OrderSubmit = () => {
+    const data2 = {
+      title: "data.title",
+      getStartDate,
+      getEndDate,
+      totalprice: 230,
+      paymentApproved: false,
+    }
+    sessionStorage.setItem("item", JSON.stringify(data2))
+
+    fetch("http://localhost:3000/api/create-checkout-session", {
+      method: "POST",
+      body: JSON.stringify({
+        cart: "cart",
+      }),
+    }).then((response) => response.json())
+      .then((response) => {
+        console.log('2nd responce',response);
+        window.location.href = response.session.url;
+        onSubmit()
+      });
+  };
+
+
+  const onSubmit = (data) => {
     if (getStartDate && getEndDate) {
       setSelectDate(false);
       axios
         .post("/api/createOrder", {
-          title: data.title,
+          title: "data.title",
           getStartDate,
           getEndDate,
           totalprice: days * data.price_per_unit,
           paymentApproved: false,
-          name : data.name,
-          email : data.email,
-          mobile : data.mobile,
+          name: data.name,
+          email: data.email,
+          mobile: data.mobile,
         })
         .then(function (response) {
           console.log("response", response);
@@ -107,6 +138,9 @@ const Slug = () => {
       setSelectDate(true);
     }
   };
+
+
+
 
   function openModal() {
     setIsOpen(true);
@@ -226,8 +260,7 @@ const Slug = () => {
                 </p>
               </div>
               <button
-                // onClick={handleBooking}
-                onClick={openModal}
+                onClick={OrderSubmit}
                 className={`border w-full p-2 mt-3 rounded-full text-base font-semibold ${
                   !selectDate
                     ? "hover:bg-black cursor-pointer hover:text-white border-black text-black"
@@ -279,7 +312,11 @@ const Slug = () => {
                   {...register("name", { required: true })}
                   className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
                 />
-                {errors.name && <span className="text-sm text-red-500">This field is required</span>}
+                {errors.name && (
+                  <span className="text-sm text-red-500">
+                    This field is required
+                  </span>
+                )}
               </div>
               <div className="w-1/2">
                 <label className="block font-bangla-mn">Email</label>
@@ -289,20 +326,32 @@ const Slug = () => {
                   {...register("email", { required: true })}
                   className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
                 />
-                {errors.email && <span className="text-sm text-red-500">This field is required</span>}
+                {errors.email && (
+                  <span className="text-sm text-red-500">
+                    This field is required
+                  </span>
+                )}
               </div>
             </div>
             <div className="mt-3">
-                <label className="block font-bangla-mn">Mobile Number</label>
-                <input
-                  type="number"
-                  name="mobile"
-                  {...register("mobile", { required: true })}
-                  className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
-                />
-                {errors.mobile && <span className="text-sm text-red-500">This field is required</span>}
+              <label className="block font-bangla-mn">Mobile Number</label>
+              <input
+                type="number"
+                name="mobile"
+                {...register("mobile", { required: true })}
+                className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
+              />
+              {errors.mobile && (
+                <span className="text-sm text-red-500">
+                  This field is required
+                </span>
+              )}
             </div>
-            <input type="submit" value="Submit Order" className="mt-4 main-btn py-2 cursor-pointer"/>
+            <input
+              type="submit"
+              value="Submit Order"
+              className="mt-4 main-btn py-2 cursor-pointer"
+            />
           </form>
         </div>
       </Modal>

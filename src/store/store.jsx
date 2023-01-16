@@ -5,7 +5,8 @@ import TotalBookingDays from "./features/BookingTabSlice/TotalBookingDays"
 const store = configureStore({
     reducer:{
         openBookingTab : openBookingTabSlice.reducer,
-        TotalBookingDays: TotalBookingDays.reducer
+        TotalBookingDays: TotalBookingDays.reducer,
+
     }
 })
 
