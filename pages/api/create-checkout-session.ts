@@ -20,7 +20,7 @@ export default async function handler(
       quantity: 1,
     },],
     mode: 'payment',
-    success_url: 'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
+    success_url: 'https://mamshouse.vercel.app/success?session_id={CHECKOUT_SESSION_ID}',
     cancel_url: 'http://localhost:3000/cancel',
   });
   console.log(session)
