@@ -49,7 +49,7 @@ const SliderCard = ({item}) => {
 };
 
 export default function ResidenceSlider({residencesData}) {
-  console.log("🚀 ~ file: Residence.slider.jsx:50 ~ ResidenceSlider ~ residencesData", residencesData)
+  
   const settings = {
     className: "center",
     centerMode: true,
