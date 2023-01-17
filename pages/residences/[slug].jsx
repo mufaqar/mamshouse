@@ -100,7 +100,7 @@ const Slug = () => {
     }
     sessionStorage.setItem("item", JSON.stringify(data2))
 
-    fetch("https://mamshouse.vercel.app/api/create-checkout-session", {
+    fetch("http://localhost:3000/api/create-checkout-session", {
       method: "POST",
       body: JSON.stringify({
         cart: "cart",
