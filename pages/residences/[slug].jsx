@@ -33,6 +33,7 @@ const customStyles = {
 
 const Slug = () => {
   const router = useRouter();
+  console.log("🚀 ~ file: [slug].jsx:36 ~ Slug ~ router", router)
   const id = router.query.slug;
   const lang = router.query.lang || "en";
 
@@ -41,7 +42,7 @@ const Slug = () => {
   const getEndDate = useSelector((state) => state.TotalBookingDays.endDate);
 
   const [data, setData] = useState();
-  console.log("🚀 ~ file: [slug].jsx:28 ~ Slug ~ data", data);
+  // console.log("🚀 ~ file: [slug].jsx:28 ~ Slug ~ data", data);
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectDate, setSelectDate] = useState(false);
