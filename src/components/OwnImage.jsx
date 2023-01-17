@@ -5,7 +5,7 @@ export default function OwnImage({url, alt}) {
   return (
     <>
       <div className={styles.imageContainer}>
-        <NextImage src={url} alt={alt} className={styles.image}></NextImage>
+        <NextImage src={url} alt={alt} className={`${styles.image} _shadow rounded-[20px]`}></NextImage>
       </div>
     </>
   )

@@ -5,10 +5,12 @@ import { Filter, HomeCard, Main } from '../src/components';
 import { useRouter } from 'next/router';
 
 // const inter = Inter({ subsets: ["latin"] });
-export default function Home({ activities }) {
+export default function Home({ activities, residences }) {
   const router = useRouter()
-  console.log("🚀 ~ activities", activities)
-      
+  const { arrival, depart, location, origin, travelers} = router.query
+  console.log("🚀 ~ residences", residences)
+
+
   return (
     <>
       <Head>
@@ -19,16 +21,64 @@ export default function Home({ activities }) {
         <script src="https://js.stripe.com/v3/"></script>
       </Head>
       <Main />
-      <section className="md:-mt-32 -mt-12 p-1">
+      <section className="md:-mt-32 -mt-12 p-1" >
         <Filter />
       </section>
-      <section className="md:mt-12 mt-6 mb-20">
+      <section className="md:mt-12 mt-6 mb-20" id="homecard">
+     
         <HomeCard />
       </section>
-
+      
     </>
   );
 }
 
 
 
+
+export async function getServerSideProps(pageContext) {
+  const locale = pageContext.query.lang || 'en';
+  const residences = await sanityClient.fetch(
+    `*[_type == "residences"]{
+        _id,
+        "title": title[$locale],
+        "location": location[$locale], 
+        slug,
+        feature_poster{
+          asset->{
+            url
+          }
+        },
+        feature_banner{
+          asset->{
+            url
+          }
+        },
+        "short_info" : short_info[$locale],
+        gallery[]{
+          asset->{
+            url
+          }
+        },
+        price_per_unit,
+        "description" : description[$locale],
+        features[]{
+          title,
+          icon{
+            asset->{
+              url
+            }
+          }
+        }
+
+
+  }`,
+    { locale }
+  );
+
+  return {
+    props: {
+      residences,
+    },
+  };
+}

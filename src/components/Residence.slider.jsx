@@ -17,13 +17,13 @@ const SliderCard = ({item}) => {
   return (
     <>
       <div className="p-2 mt-2 ">
-        <div className="relative">
+        <div className="relatives ">
           <Image
             src={item.feature_poster?.asset.url}
             alt="hero card"
             width={500}
             height={550}  
-            className="w-full h-[550px] rounded-[20px]"
+            className="w-full shadow-md h-[550px] rounded-[20px]"
           />
           <div className="absolute flex flex-col justify-end top-0 text-white w-full rounded-[20px] h-[550px] p-3 px-5">
             <div className="flex justify-between items-center">
@@ -54,8 +54,8 @@ export default function ResidenceSlider({residencesData}) {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
+    centerPadding: "100px",
+    slidesToShow:3,
     speed: 500,
     arrows: false,
     responsive: [

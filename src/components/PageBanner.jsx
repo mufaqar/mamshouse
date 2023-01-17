@@ -3,7 +3,7 @@ import { HiOutlineArrowSmRight } from "react-icons/hi";
 import Link from "next/link";
 import { IoLogoInstagram } from "react-icons/io";
 import { BsEnvelope,BsTelephone } from "react-icons/bs";
-
+import Image from "next/image";
 
 
 export default function PageBanner({
@@ -13,14 +13,15 @@ export default function PageBanner({
   heading,
   info,
   pageType,
+  ArrowDownImg
 }) {
   
   return (
     <main
-      className="md:h-screen h-[700px] w-full PageBanner"
+      className="md:h-screen h-[700px] w-full relative PageBanner"
       style={{ background: `url(${srcUrl ? srcUrl : src?.src})` }}
     >
-      <div className="flex flex-col justify-center items-center h-full ">
+      <div className="flex flex-col justify-center items-center h-full overlay w-full absolute top-0 right-0 bottom-0 bg-black/40">
         <div
           className={`max-w-[670px] text-center ${
             pageType === "contact" ? "text-black" : "text-white"
@@ -69,6 +70,7 @@ export default function PageBanner({
             </ul>
           )}
         </div>
+       { ArrowDownImg && <Image src={ArrowDownImg} alt="down Arrow" className="absolute bottom-5 w-7 animate-bounce transform translate-x-1/2 right-1/2"/>}
       </div>
     </main>
   );
