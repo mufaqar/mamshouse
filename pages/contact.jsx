@@ -38,7 +38,7 @@ export default function Contact() {
                 <Link
                   href="#"
                   target="__blank"
-                  className="flex items-center gap-1"
+                  className="flex items-center gap-3"
                 >
                   <IoLogoInstagram size={22} />
                   <span className="font-light text-base">@mamshouse</span>
@@ -48,7 +48,7 @@ export default function Contact() {
                 <Link
                   href="#"
                   target="__blank"
-                  className="flex items-center gap-1"
+                  className="flex items-center gap-3"
                 >
                   <BsEnvelope size={18} />
                   <span className="font-light text-base">
@@ -60,7 +60,7 @@ export default function Contact() {
                 <Link
                   href="#"
                   target="__blank"
-                  className="flex items-center gap-1"
+                  className="flex items-center gap-3"
                 >
                   <BsTelephone size={17} />
                   <span className="font-light text-base">+221 123 456</span>

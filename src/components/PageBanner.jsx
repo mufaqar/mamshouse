@@ -47,23 +47,23 @@ export default function PageBanner({
             )}
           </div>
           {pageType === "contact" && (
-            <ul className="w-full flex justify-center gap-2 md:gap-12 mt-6">
+            <ul className="w-full flex justify-center gap-2 md:gap-10 mt-6">
               <li>
-                <Link href="#" target="__blank" className="flex items-center gap-1">
+                <Link href="#" target="__blank" className="flex items-center gap-[2px]">
                   <IoLogoInstagram size={18}/>
-                  <span className="font-light text-xs">@mamshouse</span>  
+                  <span className="font-light italic text-xs">@mamshouse</span>  
                 </Link>
               </li>
               <li>
-              <Link href="#" target="__blank" className="flex items-center gap-1">
+              <Link href="#" target="__blank" className="flex items-center gap-[2px]">
                 <BsEnvelope size={15}/>
-                <span className="font-light text-xs">hello@mamshouse.com</span>  
+                <span className="font-light italic text-xs">hello@mamshouse.com</span>  
               </Link>
             </li>
             <li>
-            <Link href="#" target="__blank" className="flex items-center gap-1">
+            <Link href="#" target="__blank" className="flex items-center gap-[2px]">
               <BsTelephone size={14}/>
-              <span className="font-light text-xs">+221 123 456</span>  
+              <span className="font-light italic text-xs">+221 123 456</span>  
             </Link>
           </li>
             </ul>
