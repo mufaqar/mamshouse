@@ -1,31 +1,38 @@
+import { createCheckoutSession } from 'next-stripe/client'
+import { loadStripe } from "@stripe/stripe-js";
 
 
-export default function Cart() {
+export default function Test() {
 
-  return (
-    <div className="flex-1 px-4 py-6 mt-20">
-      
-      <div className="mt-6">
-      <div>Total $ </div>
-      <a 
-        onClick={() => {
-          fetch('http://localhost:3000/api/create-checkout-session', {
-            method: 'POST',
-            body: JSON.stringify({
-              cart: 'cart',
-            }),
-          })
-          .then(response => response.json())
-          .then(response => {
-            console.log(response);
-            window.location.href = response.session.url;
-          })
-        }}
-        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium pointer text-white"
-      >
-        Checkout
-      </a>
+    const handleCheckout = async () => {
+        const priceOne = 18;
+        const session = await createCheckoutSession({
+            success_url: window.location.origin + '/thank-you?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url: window.location.href,
+            line_items: [
+                {
+                    quantity: 1,
+                    name : 'Beanie with Logo',
+                    images: ['https://via.placeholder.com/150'],
+                    amount: Math.round(priceOne * 100),
+                    currency: 'usd',
+                },
+            ],
+            payment_method_types: ['card'],
+            mode: 'payment'
+        })
+
+        try {
+            const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+            if (stripe) {
+                stripe.redirectToCheckout({ sessionId: session.id });
+            }
+        } catch (error) {
+            console.log( error );
+        }
+    }
+
+    return <div>
+        <button onClick={handleCheckout}>Checkout</button>
     </div>
-    </div>
-  )
 }
