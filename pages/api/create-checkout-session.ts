@@ -20,8 +20,8 @@ export default async function handler(
       quantity: 1,
     },],
     mode: 'payment',
-    success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${req.headers.origin}/cancel`,
+    success_url: 'https://mamshouse.vercel.app/success?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: 'http://localhost:3000/cancel',
   });
   console.log(session)
   if(session){
@@ -30,6 +30,7 @@ export default async function handler(
     console.log('not exist')
   }
   res.status(200).json({ session })
+
 
 
 }
