@@ -23,7 +23,7 @@ export default function Test() {
         })
 
         try {
-            const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+            const stripe = await loadStripe("pk_test_51KZccKBYpJVF6ADtN3rvS5IMESpaLOliHVZjbvRbIa7DKFczmBcCsgk3n7quQyhelu8v6tNJT6W1u5PiUeSg8lfC008cLGOadB");
             if (stripe) {
                 stripe.redirectToCheckout({ sessionId: session.id });
             }
