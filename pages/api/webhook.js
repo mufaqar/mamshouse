@@ -11,6 +11,26 @@ const stripe = new Stripe(
 });
 const webhookSecret = "we_1MR9UXBYpJVF6ADtdQZXA5km";
 
+
+const config = {
+  projectId: "5x5wnf9u",
+  dataset: "production",
+  useCdn: false,
+  token:
+    "skrDAeBk3tz1Dr4Yo3DIZlARomfTD13JEjnkN23A1XPejoWGFYbnj2PHBvkCTZRFocFevdHmIEYMOEDOpIFkHFqsDPRcujOIm2y4SitswFsYx6hQYCq5LlD3dB2lgs4rP1RDIrHeejWr1m7yOcJnEEdKcpWRwh2ag1i93VgKIcQoB4rryeey",
+};
+const client = sanityClient(config);
+try {
+  await client.create({
+    _type: "booking",
+    title: "weebhook",
+  });
+} catch (err) {
+  console.error(err);
+  return res.status(500).json({ message: `Couldn't submit comment`, err });
+}
+
+
 const handler = async (req, res) => {
   if (req.method === "POST") {
     const buf = await buffer(req);
@@ -19,23 +39,7 @@ const handler = async (req, res) => {
     let event;
 
 
-    const config = {
-      projectId: "5x5wnf9u",
-      dataset: "production",
-      useCdn: false,
-      token:
-        "skrDAeBk3tz1Dr4Yo3DIZlARomfTD13JEjnkN23A1XPejoWGFYbnj2PHBvkCTZRFocFevdHmIEYMOEDOpIFkHFqsDPRcujOIm2y4SitswFsYx6hQYCq5LlD3dB2lgs4rP1RDIrHeejWr1m7yOcJnEEdKcpWRwh2ag1i93VgKIcQoB4rryeey",
-    };
-    const client = sanityClient(config);
-    try {
-      await client.create({
-        _type: "booking",
-        title: "weebhook",
-      });
-    } catch (err) {
-      console.error(err);
-      return res.status(500).json({ message: `Couldn't submit comment`, err });
-    }
+    
 
     try {
       event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
