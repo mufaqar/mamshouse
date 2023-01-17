@@ -32,7 +32,7 @@ export default function Test() {
         }
     }
 
-    return <div>
+    return <div className='mt-20'>
         <button onClick={handleCheckout}>Checkout</button>
     </div>
 }
