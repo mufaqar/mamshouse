@@ -10,33 +10,38 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
-  console.log("🚀 ~ file: Header.jsx:12 ~ Header ~ router", router)
+  console.log("🚀 ~ file: Header.jsx:12 ~ Header ~ router", router);
   const { pathname } = router;
-  const l = Object.keys(router.query).length
+  const l = Object.keys(router.query).length;
 
   const ChangeLang = (lang) => {
-    const query = {...router.query, lang}
-    l > 0 ? router.push({ pathname: "/", query }) :  router.push({ pathname: "/" , query:{lang: lang} })
-  }
+    const query = { ...router.query, lang };
+    l > 0
+      ? router.push({ pathname: "/", query })
+      : router.push({ pathname: "/", query: { lang: lang } });
+  };
 
-  const ChangeNav = (path)=>{
+  const ChangeNav = (path) => {
     // console.log('router.query?.lang', router.query?.lang)
-    router.query?.lang ? router.push({ pathname: `/${path}`, query:{lang: router.query?.lang}}) : router.push({ pathname: `/${path}`})
-    
-  }
-
-
+    router.query?.lang
+      ? router.push({
+          pathname: `/${path}`,
+          query: { lang: router.query?.lang },
+        })
+      : router.push({ pathname: `/${path}` });
+  };
 
   return (
     <header className="absolute top-0 right-0 w-full shadow-sm z-10 bg-white">
       <div className="flex justify-between px-2 md:px-8 items-center h-16 bg-white">
         {/* logo */}
         <div>
-        
-            <h1 className="uppercase cursor-pointer mt-[14px] font-bangla-mn text-xl md:text-2xl leading-7" onClick={()=>ChangeNav('/')}>
-              mamshouse.
-            </h1>
-          
+          <h1
+            className="uppercase cursor-pointer mt-[14px] font-bangla-mn text-xl md:text-2xl leading-7"
+            onClick={() => ChangeNav("/")}
+          >
+            mamshouse.
+          </h1>
         </div>
         <nav className={`md:block ${isMobile ? "block" : "hidden"}`}>
           <ul
@@ -49,15 +54,15 @@ export default function Header() {
               className={`cursor-pointer ${
                 pathname === "/residences" && "nav_item"
               }`}
-              onClick={()=>ChangeNav('residences')}
-              >
+              onClick={() => ChangeNav("residences")}
+            >
               Résidences
             </li>
             <li
               className={`cursor-pointer ${
                 pathname === "/activities" && "nav_item"
               }`}
-              onClick={()=>ChangeNav('activities')}
+              onClick={() => ChangeNav("activities")}
             >
               Activités
             </li>
@@ -65,7 +70,7 @@ export default function Header() {
               className={`cursor-pointer ${
                 pathname === "/contact" && "nav_item"
               }`}
-              onClick={()=>ChangeNav('contact')}
+              onClick={() => ChangeNav("contact")}
             >
               Contact
             </li>
@@ -75,11 +80,11 @@ export default function Header() {
               </Link>
             </li>
             <div className="flex gap-4">
-              <div onClick={()=>ChangeLang('fr')}>
+              <div onClick={() => ChangeLang("fr")}>
                 <div className="hover:underline">FR</div>
               </div>
               |
-              <div onClick={()=>ChangeLang('en')}>
+              <div onClick={() => ChangeLang("en")}>
                 <div className="hover:underline">EN</div>
               </div>
             </div>
