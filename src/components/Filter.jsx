@@ -5,7 +5,6 @@ import { AiOutlineCalendar, AiOutlineTeam } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
-
 export default function Filter() {
   const [origin, setOrigin] = useState("Lieux");
 
@@ -17,9 +16,13 @@ export default function Filter() {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const query = {...data, origin}
-    router.push({ pathname: "/", query });
-  }
+    console.log("🚀 ~ file: Filter.jsx:20 ~ onSubmit ~ data", data);
+    const query = { ...data, origin };
+    /* It's checking if the form is empty. */
+    data.arrival === "" && data.depart === "" && data.location === "" && data.travelers === "" ? router.push({ pathname: "/" }) : router.push({ pathname: "/", query });
+
+    
+  };
 
   return (
     <div className="rounded-xl filter border-[2px] border-white p-8 container mx-auto">
@@ -43,7 +46,7 @@ export default function Filter() {
           Région
         </li>
       </ul>
-      <form >
+      <form>
         <div className="flex flex-col md:flex-row justify-between md:px-10 pt-10 mb-5 gap-y-5 md:items-center">
           <div className="flex">
             <div className="transform text-[#C3C3C3] text-lg pt-2 -scale-x-100">
@@ -111,7 +114,10 @@ export default function Filter() {
 
           {/* search */}
           <div>
-            <div className="cursor-pointer inline-block border border-black p-2 rounded-full" onClick={handleSubmit(onSubmit)}>
+            <div
+              className="cursor-pointer inline-block border border-black p-2 rounded-full"
+              onClick={handleSubmit(onSubmit)}
+            >
               <FiSearch />
             </div>
           </div>
@@ -120,4 +126,3 @@ export default function Filter() {
     </div>
   );
 }
-
