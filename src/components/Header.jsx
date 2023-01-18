@@ -81,11 +81,11 @@ export default function Header() {
             </li>
             <div className="flex gap-4">
               <div onClick={() => ChangeLang("fr")}>
-                <div className="hover:underline">FR</div>
+                <div className="hover:underline cursor-pointer">FR</div>
               </div>
               |
               <div onClick={() => ChangeLang("en")}>
-                <div className="hover:underline">EN</div>
+                <div className="hover:underline cursor-pointer">EN</div>
               </div>
             </div>
           </ul>
@@ -95,7 +95,7 @@ export default function Header() {
           {isMobile ? (
             <GrClose
               size={26}
-              className="pt-1"
+              className="pt-1 "
               onClick={() => setIsMobile(false)}
             />
           ) : (
