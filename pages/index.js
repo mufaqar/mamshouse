@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 export default function Home({ activities, residences }) {
   const router = useRouter()
   const { arrival, depart, location, origin, travelers} = router.query
-  console.log("🚀 ~ residences", residences)
+  // console.log("🚀 ~ residences", residences)
 
   const filterQuery = residences
   .filter((item)=>(
