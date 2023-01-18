@@ -154,6 +154,8 @@ nav .nav_item:after{
     padding-left: 0 !important;
 }
 
+
+
 @media (max-width: 768px) {
     ._calendar{
         margin-top: 1rem !important;
@@ -216,4 +218,18 @@ progress {
   progress::-webkit-progress-value {
     background-color: #111;
     border-radius: 7px;
+  }
+
+
+  .portable_content p{
+    font-size: 16px;
+  }
+  .portable_content ul{
+    list-style: disc;
+    margin-top: 01rem;
+    padding-left: 1rem;
+  }
+
+  .portable_content ul li{
+    margin-top: .7rem;
   }

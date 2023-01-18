@@ -10,7 +10,11 @@ export default function Home({ activities, residences }) {
   const { arrival, depart, location, origin, travelers} = router.query
   console.log("🚀 ~ residences", residences)
 
-
+const filterQuery = residences
+.filter((item)=>(
+  item.location.toLowerCase().includes(location?.toLowerCase()) &&
+  (item.arrival === '' || item.arrival >= travelers)
+))
   return (
     <>
       <Head>
@@ -25,12 +29,34 @@ export default function Home({ activities, residences }) {
         <Filter />
       </section>
       <section className="md:mt-12 mt-6 mb-20" id="homecard">
-     
-        <HomeCard />
+        {
+          filterQuery.map((item,i)=>{
+            return(
+              <HomeCard key={i} data={item}/>
+            )
+          })
+        }
+
+        {
+          !filterQuery.length > 0 &&
+          residences.slice(0,1).map((item,i)=>{
+            return(
+              <HomeCard data={item} key={i}/>
+            )
+          })
+        }
       </section>
       
     </>
   );
+}
+
+
+
+const NotFound = () =>{
+  return(
+    <h2 className='font-bangla-mn mt-20 container mx-auto text-2xl md:text-4xl'>Result Not Found</h2> 
+  )
 }
 
 
@@ -41,6 +67,10 @@ export async function getServerSideProps(pageContext) {
   const residences = await sanityClient.fetch(
     `*[_type == "residences"]{
         _id,
+        departure,
+        travelers,
+        arrival,
+        content,
         "title": title[$locale],
         "location": location[$locale], 
         slug,
@@ -61,7 +91,7 @@ export async function getServerSideProps(pageContext) {
           }
         },
         price_per_unit,
-        "description" : description[$locale],
+         "description" : description[$locale],
         features[]{
           title,
           icon{
@@ -69,8 +99,8 @@ export async function getServerSideProps(pageContext) {
               url
             }
           }
-        }
-
+        },
+        
 
   }`,
     { locale }

@@ -99,6 +99,7 @@ export default {
       title: "Price per unit",
       type: "string",
     },
+
     {
       name: "description",
       title: "Description",
@@ -107,23 +108,83 @@ export default {
         {
           title: "English",
           name: "en",
-          type: "text",
+          type: "array",
+          of: [
+            {
+              type: "block",
+            },
+            {
+              type: "image",
+              fields: [
+                {
+                  type: "text",
+                  name: "alt",
+                  title: "Alternative text",
+                  description: `Some of your visitors cannot see images, 
+                be they blind, color-blind, low-sighted; 
+                alternative text is of great help for those 
+                people that can rely on it to have a good idea of 
+                what\'s on your page.`,
+                  options: {
+                    isHighlighted: true,
+                  },
+                },
+              ],
+            },
+          ],
         },
         {
           title: "French",
           name: "fr",
-          type: "text",
+          type: "array",
+          of: [
+            {
+              type: "block",
+            },
+            {
+              type: "image",
+              fields: [
+                {
+                  type: "text",
+                  name: "alt",
+                  title: "Alternative text",
+                  description: `Some of your visitors cannot see images, 
+                be they blind, color-blind, low-sighted; 
+                alternative text is of great help for those 
+                people that can rely on it to have a good idea of 
+                what\'s on your page.`,
+                  options: {
+                    isHighlighted: true,
+                  },
+                },
+              ],
+            },
+          ],
         },
       ],
     },
+
     {
       title: "Features",
       name: "features",
       type: "array",
       of: [{ type: "features" }],
     },
+
+    {
+      name: "departure",
+      title: "Departure",
+      type: "string",
+    },
+    {
+      name: "travelers",
+      title: "Travelers",
+      type: "string",
+    },
+    {
+      name: "arrival",
+      title: "Arrival",
+      type: "number",
+    },
   ],
-
 };
-
-
