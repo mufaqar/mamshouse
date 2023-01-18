@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
-
+import ArrowDownImg from '../../public/svg/arrow-down.svg'
 
 const customStyles = {
   content: {
@@ -157,6 +157,7 @@ const Slug = () => {
         heading="Les Residences"
         info={data?.short_info}
         pageType="residence"
+        ArrowDownImg={ArrowDownImg}
       />
       <section className="mt-9 container mx-auto p-2 md:p-0 mb-5">
         <Link href="/residences">
