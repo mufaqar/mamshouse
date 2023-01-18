@@ -22,17 +22,17 @@ const SliderCard = ({item}) => {
             src={item.feature_poster?.asset.url}
             alt="hero card"
             width={500}
-            height={550}  
-            className="w-full shadow-md h-[550px] rounded-[20px]"
+            height={520}  
+            className="w-full shadow-md h-[520px] rounded-[20px]"
           />
-          <div className="absolute flex flex-col justify-end top-0 text-white w-full rounded-[20px] h-[550px] p-3 px-5">
+          <div className="absolute flex flex-col justify-end top-[26px] text-white w-full rounded-[20px] h-[520px] p-3 px-5">
             <div className="flex justify-between items-center">
               <div>
                 <p>
                   {item?.location}
                 </p>
                 <Link href={`residences/${item.slug.current}`}>
-                  <h2 className="font-bangla-mn sub-heading text-3xl mt-2">
+                  <h2 className="font-bangla-mn sub-heading text-2xl lg:text-3xl mt-2">
                     {item.title}
                   </h2>
                 </Link>
@@ -57,6 +57,7 @@ export default function ResidenceSlider({residencesData}) {
     centerPadding: "100px",
     slidesToShow:3,
     speed: 500,
+    dots: false,
     arrows: false,
     responsive: [
       {
@@ -65,7 +66,7 @@ export default function ResidenceSlider({residencesData}) {
           slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
-          dots: true,
+         
         },
       },
       {
