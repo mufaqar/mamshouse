@@ -10,11 +10,11 @@ export default function Home({ activities, residences }) {
   const { arrival, depart, location, origin, travelers} = router.query
   console.log("🚀 ~ residences", residences)
 
-const filterQuery = residences
-.filter((item)=>(
-  item.location.toLowerCase().includes(location?.toLowerCase()) &&
-  (item.arrival === '' || item.arrival >= travelers)
-))
+  const filterQuery = residences
+  .filter((item)=>(
+    item.location.toLowerCase().includes(location?.toLowerCase()) &&
+    (item.arrival === '' || item.arrival >= travelers)
+  ))
   return (
     <>
       <Head>
