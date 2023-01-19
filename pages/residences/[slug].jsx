@@ -19,7 +19,8 @@ import axios from "axios";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import ArrowDownImg from "../../public/svg/arrow-down.svg";
-import NotFound from "../NotFound";
+import NotFound from "../404";
+import Loading from "../../src/components/loading";
 
 const customStyles = {
   content: {
@@ -48,6 +49,7 @@ const Slug = ({ slug }) => {
   const [selectDate, setSelectDate] = useState(false);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [days, setDays] = useState(getTotalDays);
+  const [showComponent, setShowComponent] = useState(false);
 
   const title = data?.slug.current;
   const slugParms = slug;
@@ -84,6 +86,10 @@ const Slug = ({ slug }) => {
         });
     }
     getSinglePost();
+    setTimeout(() => {
+      setShowComponent(true);
+    }, 4000);
+
   }, []);
 
   const OrderSubmit = () => {
@@ -359,7 +365,10 @@ const Slug = ({ slug }) => {
           </Modal>
         </>
       ) : (
-        <NotFound/>
+
+        showComponent ? <NotFound/> : <Loading/>
+   
+       
       )}
     </>
   );
