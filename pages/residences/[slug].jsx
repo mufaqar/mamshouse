@@ -31,9 +31,9 @@ const customStyles = {
   },
 };
 
-const Slug = () => {
+const Slug = ({slug}) => {
+
   const router = useRouter();
-  console.log("🚀 ~ file: [slug].jsx:36 ~ Slug ~ router", router)
   const id = router.query.slug;
   const lang = router.query.lang || "en";
 
@@ -42,14 +42,12 @@ const Slug = () => {
   const getEndDate = useSelector((state) => state.TotalBookingDays.endDate);
 
   const [data, setData] = useState();
-  // console.log("🚀 ~ file: [slug].jsx:28 ~ Slug ~ data", data);
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectDate, setSelectDate] = useState(false);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [days, setDays] = useState(getTotalDays);
-
-  const dispatch = useDispatch()
+ 
 
   const renderState = (daysProps) => {
     setDays(daysProps);
@@ -68,15 +66,13 @@ const Slug = () => {
       setOpen(true);
     }
   };
-  // create an event listener
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-  });
 
-  useEffect(() => {
+
+  useEffect((id) => {
+    window.addEventListener("resize", handleResize)
     async function getSinglePost() {
       await axios
-        .post("/api/getsinglepost", { id, lang })
+        .post("/api/getsinglepost", { id:slug, lang })
         .then(function (response) {
           setData(response.data[0]);
         })
@@ -84,9 +80,12 @@ const Slug = () => {
           console.log(error);
         });
     }
-    getSinglePost();
+    getSinglePost()
   }, []);
 
+
+  
+  
 
 
 
@@ -363,7 +362,7 @@ const Slug = () => {
 
 export default Slug;
 
-const ResidenceOrder = ({ renderState, features }) => {
+const ResidenceOrder = ({ renderState, features}) => {
   const dispatch = useDispatch();
   const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."];
   const [values, setValues] = useState([new DateObject()]);
@@ -508,3 +507,15 @@ const ResidenceOrder = ({ renderState, features }) => {
     </>
   );
 };
+
+
+
+export async function getServerSideProps({ params }) {
+  const { slug } = params;
+
+  return {
+    props: {
+      slug
+    },
+  };
+}
