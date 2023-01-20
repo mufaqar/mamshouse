@@ -151,6 +151,11 @@ const Slug = ({ slug }) => {
 
   return (
     <>
+    <Head>
+    <title>{data?.title} | {process.env.NEXT_PUBLIC_SITE_NAME}</title>
+    <meta name="description" content={data?.short_info} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </Head>
       {title === slugParms ? (
         <>
           <PageBanner
