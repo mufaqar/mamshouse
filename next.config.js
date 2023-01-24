@@ -10,6 +10,12 @@ const nextConfig = {
       "cdn.sanity.io",
       "images.unsplash.com",
     ]
+  },
+
+  serverless: {
+    functions: {
+      stripeWebhook: './pages/api/webhook.js'
+    }
   }
 }
 

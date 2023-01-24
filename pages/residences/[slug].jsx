@@ -93,14 +93,17 @@ const Slug = ({ slug }) => {
   }, []);
 
   const OrderSubmit = () => {
-    const data2 = {
-      title: "data.title",
+    const orderdata = {
+      title: data.title,
       getStartDate,
       getEndDate,
       totalprice: 230,
       paymentApproved: false,
+      name: data.name,
+      email: data.email,
+      mobile: data.mobile,
     };
-    sessionStorage.setItem("item", JSON.stringify(data2));
+    // sessionStorage.setItem("item", JSON.stringify(data2));
 
     fetch("https://mamshouse.vercel.app/api/create-checkout-session", {
       method: "POST",
@@ -112,7 +115,6 @@ const Slug = ({ slug }) => {
       .then((response) => {
         console.log("2nd responce", response);
         window.location.href = response.session.url;
-        onSubmit();
       });
   };
 

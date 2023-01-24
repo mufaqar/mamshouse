@@ -6,6 +6,10 @@ export default async function handler(
   res: NextApiResponse<any>
 ) {
 
+  console.log("🚀 ~ file: create-checkout-session.ts:10 ~ d", req.body)
+ 
+  // const objString = '?' + new URLSearchParams(orderdata.orderdata).toString();
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [{
@@ -20,7 +24,7 @@ export default async function handler(
       quantity: 1,
     },],
     mode: 'payment',
-    success_url: 'https://mamshouse.vercel.app/success?session_id={CHECKOUT_SESSION_ID}',
+    success_url: `https://mamshouse.vercel.app/success`,
     cancel_url: 'http://localhost:3000/cancel',
   });
   console.log(session)

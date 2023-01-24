@@ -1,18 +1,9 @@
 import axios from 'axios';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 
 const Success = () => {
-
-//   useEffect(()=>{
-//     var item_value = sessionStorage.getItem("item");
-//     var items = JSON.parse(item_value)
-//     console.log("🚀 ~ file: success.jsx:6 ~ useEffect ~ item_value", items)
-    
-// },[])
-
-
-
 
   return (
     <>

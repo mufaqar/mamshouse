@@ -10,7 +10,7 @@ export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
-  console.log("🚀 ~ file: Header.jsx:12 ~ Header ~ router", router);
+  // console.log("🚀 ~ file: Header.jsx:12 ~ Header ~ router", router);
   const { pathname } = router;
   const l = Object.keys(router.query).length;
 

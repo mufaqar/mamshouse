@@ -3602,6 +3602,14 @@
   "resolved" "https://registry.npmjs.org/exif-component/-/exif-component-1.0.1.tgz"
   "version" "1.0.1"
 
+"express-validator@^6.14.3":
+  "integrity" "sha512-c4b9NMdhskfcLbH/FchsSfCt4Vb14gKzcotG9zLS+VoOJDox57aGhCL+kmAu7cl+ytaSed+HD5jdJhel8DQsdg=="
+  "resolved" "https://registry.npmjs.org/express-validator/-/express-validator-6.14.3.tgz"
+  "version" "6.14.3"
+  dependencies:
+    "lodash" "^4.17.21"
+    "validator" "^13.7.0"
+
 "extend@~3.0.2":
   "integrity" "sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g=="
   "resolved" "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz"
@@ -5631,6 +5639,11 @@
   dependencies:
     "side-channel" "^1.0.4"
 
+"querystring@^0.2.1":
+  "integrity" "sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg=="
+  "resolved" "https://registry.npmjs.org/querystring/-/querystring-0.2.1.tgz"
+  "version" "0.2.1"
+
 "querystringify@^2.1.1":
   "integrity" "sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ=="
   "resolved" "https://registry.npmjs.org/querystringify/-/querystringify-2.2.0.tgz"
@@ -7058,6 +7071,11 @@
   dependencies:
     "spdx-correct" "^3.0.0"
     "spdx-expression-parse" "^3.0.0"
+
+"validator@^13.7.0":
+  "integrity" "sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw=="
+  "resolved" "https://registry.npmjs.org/validator/-/validator-13.7.0.tgz"
+  "version" "13.7.0"
 
 "value-equal@^1.0.1":
   "integrity" "sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw=="
