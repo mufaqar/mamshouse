@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { exit } from 'process'
 const stripe = require('stripe')('sk_test_51KZccKBYpJVF6ADtJIF54auA6RHJEEiEBasxyMMN8hvwOC2czH4rSBdt0tRCwCMw9gYUxynchdG5yjxCjYp44JyF00tvx0T4gJ')
 
 export default async function handler(
@@ -7,8 +8,11 @@ export default async function handler(
 ) {
 
   console.log("🚀 ~ file: create-checkout-session.ts:10 ~ d", req.body)
- 
-  // const objString = '?' + new URLSearchParams(orderdata.orderdata).toString();
+  const orderdata  = JSON.parse(req.body)
+  console.log("🚀🚀🚀🚀🚀 ~ file: create-checkout-session.ts:11 ~ orderdata", orderdata)
+
+  const objString = '?' + new URLSearchParams(orderdata.orderdata).toString();
+
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -24,10 +28,11 @@ export default async function handler(
       quantity: 1,
     },],
     mode: 'payment',
-    success_url: `https://mamshouse.vercel.app/success`,
+    success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: 'http://localhost:3000/cancel',
   });
-  console.log(session)
+  console.log(session);
+
   if(session){
     console.log('session exist')
   }else{
