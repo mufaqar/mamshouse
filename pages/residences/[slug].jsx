@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import ArrowDownImg from "../../public/svg/arrow-down.svg";
 import NotFound from "../404";
 import Loading from "../../src/components/loading";
+import Head from "next/head";
 
 const customStyles = {
   content: {
@@ -89,7 +90,6 @@ const Slug = ({ slug }) => {
     setTimeout(() => {
       setShowComponent(true);
     }, 4000);
-
   }, []);
 
   const OrderSubmit = () => {
@@ -151,11 +151,13 @@ const Slug = ({ slug }) => {
 
   return (
     <>
-    <Head>
-    <title>{data?.title} | {process.env.NEXT_PUBLIC_SITE_NAME}</title>
-    <meta name="description" content={data?.short_info} />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </Head>
+      <Head>
+        <title>
+          {data?.title} | {process.env.NEXT_PUBLIC_SITE_NAME}
+        </title>
+        <meta name="description" content={data?.short_info} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       {title === slugParms ? (
         <>
           <PageBanner
@@ -369,11 +371,10 @@ const Slug = ({ slug }) => {
             </div>
           </Modal>
         </>
+      ) : showComponent ? (
+        <NotFound />
       ) : (
-
-        showComponent ? <NotFound/> : <Loading/>
-   
-       
+        <Loading />
       )}
     </>
   );
