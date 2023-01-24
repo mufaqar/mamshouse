@@ -16,7 +16,12 @@ const nextConfig = {
     functions: {
       stripeWebhook: './pages/api/webhook.js'
     }
-  }
+  },
+
+  api: {
+    bodyParser: false,
+  },
+
 }
 
 module.exports = nextConfig

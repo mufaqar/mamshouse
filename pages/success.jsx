@@ -1,9 +1,35 @@
 import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Success = () => {
+
+  const router = useRouter()
+  
+  useEffect(()=>{
+  
+      // if (getStartDate && getEndDate) {
+      //   axios
+      //     .post("http://localhost:3000/api/createOrder", {
+      //       title: "data.title",
+      //     })
+      //     .then(function (response) {
+      //       console.log("response", response);
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error);
+      //     });
+      // } else {
+      //   console.log("123");
+      // }
+      
+},[])
+
+
+
+
+
 
   return (
     <>
