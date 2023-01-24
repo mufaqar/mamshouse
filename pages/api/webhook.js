@@ -15,7 +15,7 @@ const handler = async (req, res) => {
 
     try {
       event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
-      if (event.type === "charge.succeeded") {
+      if (event.type === "checkout.session.completed") {
         const charge = event.data.object;
         console.log("🚀 ~ file: webhook.js:20 ~ handler ~ charge", charge)
         // Handle successful charge
