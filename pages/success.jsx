@@ -8,9 +8,6 @@ const stripe = require("stripe")(
 );
 
 const Success = ({ res, session }) => {
-  console.log("🚀 ~ file: success.jsx:10 ~ Success ~ session_id", session);
-
-  
 
   return (
     <>
@@ -53,7 +50,7 @@ export const getServerSideProps = async (context) => {
   const email = session.customer_details?.email
 
   if (session.status === "complete") {
-    await axios.post(`${process.env.NEXT_PUBLIC_SITE_URL}/api/createOrder`, {
+    await axios.post(`https://mamshouse.vercel.app/api/createOrder`, {
         title,
         getStartDate,
         getEndDate,
@@ -69,7 +66,7 @@ export const getServerSideProps = async (context) => {
       });
   }
   if (session.status === "complete") {
-    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/sendMail`, {
+    fetch(`https://mamshouse.vercel.app/api/sendMail`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
