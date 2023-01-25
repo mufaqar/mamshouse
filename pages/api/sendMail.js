@@ -1,23 +1,23 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer';
 
 export default async (req, res) => {
   const { getStartDate, getEndDate, totalprice, paymentApproved, email } =
     req.body;
-  console.log("rew", req.body);
+  console.log('rew', req.body);
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
-      user: "zunairgillani54@gmail.com",
-      pass: "ihtgccruyornevlv",
+      user: 'softsgens@gmail.com',
+      pass: 'cgynskuztqerrdcn',
     },
   });
 
   try {
     await transporter.sendMail({
       from: email,
-      to: `zunairgillani14@gmail.com, ${email}`,
+      to: `mufaqar@gmail.com, ${email}`,
       subject: `MAMSHOUSE | Order submitted Successfully`,
       html: ` <p><strong>Email: </strong> ${email}</p>
       <p><strong>Start Date: </strong> ${getStartDate}</p>
@@ -36,5 +36,5 @@ export default async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error.message || error.toString() });
   }
-  return res.status(200).json({ error: "" });
+  return res.status(200).json({ error: '' });
 };
