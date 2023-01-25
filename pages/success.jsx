@@ -1,11 +1,14 @@
 import axios from "axios";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+const stripe = require("stripe")(
+  "sk_test_51KZccKBYpJVF6ADtJIF54auA6RHJEEiEBasxyMMN8hvwOC2czH4rSBdt0tRCwCMw9gYUxynchdG5yjxCjYp44JyF00tvx0T4gJ"
+);
 
-
-const Success = ({ res }) => {
-  const router = useRouter();
+const Success = ({ res, session }) => {
+  console.log("🚀 ~ file: success.jsx:10 ~ Success ~ session_id", session);
 
   
 
@@ -26,6 +29,9 @@ const Success = ({ res }) => {
             We received your purchase request;
             <br /> we'll be in touch shortly!
           </p>
+          <div className="mt-6">
+          <Link href="/" className="uppercase bg-black text-white px-8 text-sm py-3">Back to Home</Link>
+          </div>
         </div>
       </div>
     </>
@@ -35,33 +41,57 @@ const Success = ({ res }) => {
 export default Success;
 
 
+export const getServerSideProps = async (context) => {
+  const id = context.query.session_id;
+  const title = context.query.title;
+  const getStartDate = context.query.getStartDate;
+  const getEndDate = context.query.getEndDate;
+  const totalprice = context.query.totalprice;
+  const paymentApproved = context.query.paymentApproved;
 
+  const session = await stripe.checkout.sessions?.retrieve(id);
+  const email = session.customer_details?.email
 
-export async function getServerSideProps(pageContext) {
-  const {title,getStartDate,getEndDate,totalprice,paymentApproved} = pageContext.query
-
-  await axios
-    .post(`${process.env.NEXT_PUBLIC_SITE_URL}/api/createOrder`, {
-      title,
-      getStartDate,
-      getEndDate,
-      totalprice,
-      paymentApproved
+  if (session.status === "complete") {
+    await axios.post(`${process.env.NEXT_PUBLIC_SITE_URL}/api/createOrder`, {
+        title,
+        getStartDate,
+        getEndDate,
+        totalprice,
+        paymentApproved:true,
+        email
+      })
+      .then(function (response) {
+        console.log("Order Submited");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  if (session.status === "complete") {
+    fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/sendMail`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({title,
+        getStartDate,
+        getEndDate,
+        totalprice,
+        paymentApproved:true,
+        email})
+    }).then((res) => {
+      // console.log('Response received')
+      if (res.status === 200) {
+        console.log('Response succeeded!')
+      }
     })
-    .then(function (response) {
-      
-      
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  
-    
-    
-  const Emptyres = [];
+  }
+
   return {
     props: {
-      Emptyres,
+      session,
     },
   };
-}
+};

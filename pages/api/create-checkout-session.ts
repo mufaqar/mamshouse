@@ -11,7 +11,7 @@ export default async function handler(
   const orderdata  = JSON.parse(req.body)
   console.log("🚀🚀🚀🚀🚀 ~ file: create-checkout-session.ts:11 ~ orderdata", orderdata)
 
-  const objString = '?' + new URLSearchParams(orderdata.orderdata).toString();
+  const objString = new URLSearchParams(orderdata.orderdata).toString();
 
 
   const session = await stripe.checkout.sessions.create({
@@ -28,7 +28,7 @@ export default async function handler(
       quantity: 1,
     },],
     mode: 'payment',
-    success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}&${objString}`,
     cancel_url: 'http://localhost:3000/cancel',
   });
   console.log(session);

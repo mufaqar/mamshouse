@@ -17,22 +17,10 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 import Modal from "react-modal";
-import { useForm } from "react-hook-form";
 import ArrowDownImg from "../../public/svg/arrow-down.svg";
 import NotFound from "../404";
 import Loading from "../../src/components/loading";
 import Head from "next/head";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
 
 const Slug = ({ slug }) => {
   const router = useRouter();
@@ -44,13 +32,15 @@ const Slug = ({ slug }) => {
   const getEndDate = useSelector((state) => state.TotalBookingDays.endDate);
 
   const [data, setData] = useState();
-  console.log("🚀 ~ ~ Slug ~ data", data);
+  // console.log("🚀 ~ ~ Slug ~ data", data);
   const [shortInfo, setShortInfo] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectDate, setSelectDate] = useState(false);
-  const [modalIsOpen, setIsOpen] = React.useState(false);
   const [days, setDays] = useState(getTotalDays);
   const [showComponent, setShowComponent] = useState(false);
+
+  const [EmptyDateAlertModelState, setEmptyDateAlertModelState] =
+    useState(false);
 
   const title = data?.slug.current;
   const slugParms = slug;
@@ -59,11 +49,12 @@ const Slug = ({ slug }) => {
     setDays(daysProps);
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  function openModal() {
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const handleResize = () => {
     if (window.innerWidth > 768) {
@@ -108,7 +99,7 @@ const Slug = ({ slug }) => {
     fetch("http://localhost:3000/api/create-checkout-session", {
       method: "POST",
       body: JSON.stringify({
-        orderdata
+        orderdata,
       }),
     })
       .then((response) => response.json())
@@ -118,38 +109,16 @@ const Slug = ({ slug }) => {
       });
   };
 
-  const onSubmit = (data) => {
-    if (getStartDate && getEndDate) {
-      setSelectDate(false);
-      axios
-        .post("/api/createOrder", {
-          title: "data.title",
-          getStartDate,
-          getEndDate,
-          totalprice: days * data.price_per_unit,
-          paymentApproved: false,
-          name: data.name,
-          email: data.email,
-          mobile: data.mobile,
-        })
-        .then(function (response) {
-          console.log("response", response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
-      console.log("123");
-      setSelectDate(true);
-    }
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
   };
-
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   return (
     <>
@@ -274,7 +243,11 @@ const Slug = ({ slug }) => {
                     </p>
                   </div>
                   <button
-                    onClick={OrderSubmit}
+                    onClick={() => {
+                      getStartDate.length > 0 && getEndDate.length > 0
+                        ? OrderSubmit()
+                        : setEmptyDateAlertModelState(true);
+                    }}
                     className={`border w-full p-2 mt-3 rounded-full text-base font-semibold ${
                       !selectDate
                         ? "hover:bg-black cursor-pointer hover:text-white border-black text-black"
@@ -309,69 +282,54 @@ const Slug = ({ slug }) => {
               features={data?.features}
             />
           )}
-
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-          >
-            <div className="w-[300px] md:w-[500px]">
-              <button onClick={closeModal}>
-                <RxCross2 size={27} />
-              </button>
-              <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex items-center gap-4">
-                  <div className="w-1/2">
-                    <label className="block font-bangla-mn">Full Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      {...register("name", { required: true })}
-                      className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
-                    />
-                    {errors.name && (
-                      <span className="text-sm text-red-500">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                  <div className="w-1/2">
-                    <label className="block font-bangla-mn">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      {...register("email", { required: true })}
-                      className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
-                    />
-                    {errors.email && (
-                      <span className="text-sm text-red-500">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
+          {/* models triggred when start and end date not exist or length less then or equal 0 */}
+          {EmptyDateAlertModelState && (
+            <section className="max-w-[500px] fixed bottom-2 left-6">
+              <div
+                id="alert-2"
+                class="flex p-4 mb-4 text-yellow-500 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-yellow-500"
+                role="alert"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="flex-shrink-0 w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="sr-only">Info</span>
+                <div class="ml-3 text-sm font-medium capitalize mr-3 text-yellow-500">
+                  Please select start & end date first!
                 </div>
-                <div className="mt-3">
-                  <label className="block font-bangla-mn">Mobile Number</label>
-                  <input
-                    type="number"
-                    name="mobile"
-                    {...register("mobile", { required: true })}
-                    className="bg-gray-200 p-2 w-full mt-1 outline-none shadow-none"
-                  />
-                  {errors.mobile && (
-                    <span className="text-sm text-red-500">
-                      This field is required
-                    </span>
-                  )}
-                </div>
-                <input
-                  type="submit"
-                  value="Submit Order"
-                  className="mt-4 main-btn py-2 cursor-pointer"
-                />
-              </form>
-            </div>
-          </Modal>
+                <button
+                  type="button"
+                  class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700"
+                  onClick={()=>setEmptyDateAlertModelState(false)}
+                >
+                  <span class="sr-only">Dismiss</span>
+                  <svg
+                    aria-hidden="true"
+                    class="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </section>
+          )}
         </>
       ) : showComponent ? (
         <NotFound />
