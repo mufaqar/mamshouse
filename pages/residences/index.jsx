@@ -2,7 +2,7 @@ import React from "react";
 import { PageBanner, ResidenceSlider } from "../../src/components";
 import ResidenceBannerImage from "../../public/images/residence-banner.png";
 import { sanityClient } from "../../src/config/sanityClient";
-import ArrowDownImg from '../../public/svg/arrow-down.svg'
+import homeIcon from '../../public/svg/home-icon.svg'
 import Head from "next/head";
 
 export default function Residences({ residences }) {
@@ -19,7 +19,7 @@ export default function Residences({ residences }) {
         heading=" Les Residences"
         info="Lorem ipsum dolor sit amet consectetur. In ipsum ac in posuere cursus in cursus eleifend. Nisi in dolor aliquet nunc quis tortor. Fusce at enim et amet viverra. Dui suspendisse scelerisque justo ultrices in convallis orci id. Purus at elit nulla pretium neque purus eget."
         pageType="residence"
-        ArrowDownImg={ArrowDownImg}
+        ArrowDownImg={homeIcon}
       />
       <ResidenceSlider residencesData={residences} />
     </div>

@@ -146,7 +146,7 @@ const Slug = ({ slug }) => {
               </h1>
             </Link>
             <h1 className="sub-heading font-bangla-mn capitalize">
-              {data?.title}
+              "{data?.title}"
             </h1>
             {/* Gallery */}
             <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mt-3 ">
@@ -377,7 +377,7 @@ const ResidenceOrder = ({ renderState, features }) => {
             {getEndDate._isValid ? totalDays + 1 : 1} nuits à{" "}
             <strong>Poppengine</strong>
           </h6>
-          <p className="text-sm mt-1 text-gray-700">
+          <p className="text-base mt-1 text-gray-700">
             {values[0].weekDay.shortName}. {values[0].day}{" "}
             {values[0].month.name} -{" "}
             {getEndDate._isValid && values[1].weekDay.shortName}.{" "}
@@ -394,6 +394,7 @@ const ResidenceOrder = ({ renderState, features }) => {
             showOtherDays
             className="_calendar"
             weekDays={weekDays}
+            currentDate
           />
           <div>
             <button className="text-sm font-normal underline flex justify-end w-full pr-7 mt-4 leading-8">

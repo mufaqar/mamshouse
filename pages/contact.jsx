@@ -87,7 +87,7 @@ export default function Contact() {
           </div>
           <div className="md:4/12 lg:w-3/12 mt-8 md:mt-0">
             <button className="main-btn w-full">réserver maintenant</button>
-            <button className="mt-6 text-center font-semibold text-xs flex items-center gap-1 justify-center w-full">réserver sur Whatsapp <HiOutlineArrowSmRight size={18}/></button>
+            <button className="mt-6 underline text-center font-semibold text-xs flex items-center gap-1 justify-center w-full">réserver sur Whatsapp <HiOutlineArrowSmRight size={18}/></button>
           </div>
         </div>
         {/* 3 */}
@@ -103,12 +103,12 @@ export default function Contact() {
             </div>
           </div>
           <div className="md:w-4/12 lg:w-3/12 mt-8 md:mt-0">
-            <button className="text-sm gap-2 lg:whitespace-nowrap flex justify-center items-center">
+            <button className="text-sm gap-2 underline lg:whitespace-nowrap flex justify-center items-center">
                 <GrHomeRounded size={14} />
                 1 route du pilier, 22600 Poppengine, Sénégal
                 <HiOutlineArrowSmRight size={16}/>
             </button>
-            <button className="text-sm mt-3 gap-2 lg:whitespace-nowrap flex justify-center items-center">
+            <button className="text-sm mt-3 underline gap-2 lg:whitespace-nowrap flex justify-center items-center">
                 <GrHomeRounded size={14} />
                 1 route du pilier, 22600 Poppengine, Sénégal
                 <HiOutlineArrowSmRight size={16}/>

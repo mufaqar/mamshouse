@@ -18,8 +18,8 @@ export default function Activities({activities}) {
   </Head>
       <PageBanner
         src={ActivitiesPageBanner}
-        subHeading="SENEGAL, POPPENGINE"
-        heading="ACTIVITES"
+        subHeading="<strong className='font-bold'>Popenguine</strong>, Sénégal"
+        heading="Activities"
         ArrowDownImg={ArrowDownImg}
         info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
       />
@@ -33,13 +33,13 @@ export default function Activities({activities}) {
                   <img
                     src={item.feature_image?.asset?.url}
                     alt={item.title}
-                    className="w-full h-full  rounded-[20px]"
+                    className="w-full h-full _shadow rounded-[20px]"
                   />
                 </div>
                 <div className={`lg:pr-[30%] mt-6 md:mt-0 ${i%2 === 1 && "text-right lg:pr-0 lg:pl-[30%]"}`}>
                   <h2 className="sub-heading font-bangla-mn">{item.title}</h2>
                   <p className="text-[15px] font-normal mt-4 md:mt-4 lg:mt-7">{item.description}</p>
-                  <Link href="#"><h6 className={`flex items-center gap-1 text-sm w-full font-semibold mt-[30px] ${i%2 === 1 && "justify-end"}`}>Découvrir l’activité <HiOutlineArrowSmRight size={20}/></h6></Link>
+                  <Link href="#"><h6 className={`flex items-center underline gap-1 text-sm w-full font-semibold mt-[30px] ${i%2 === 1 && "justify-end"}`}>Découvrir l’activité <HiOutlineArrowSmRight size={20}/></h6></Link>
                 </div>
               </div>
             );

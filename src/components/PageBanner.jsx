@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IoLogoInstagram } from "react-icons/io";
 import { BsEnvelope,BsTelephone } from "react-icons/bs";
 import Image from "next/image";
-
+import parse from 'html-react-parser';
 
 export default function PageBanner({
   src,
@@ -21,14 +21,14 @@ export default function PageBanner({
       className="md:h-screen h-[700px] w-full relative PageBanner"
       style={{ background: `url(${srcUrl ? srcUrl : src?.src})` }}
     >
-      <div className="flex flex-col justify-center items-center h-full overlay w-full absolute top-0 right-0 bottom-0 bg-black/40">
+      <div className="flex flex-col justify-center items-center h-full overlay w-full absolute top-0 right-0 bottom-0 bg-black/20">
         <div
           className={`max-w-[670px] text-center ${
             pageType === "contact" ? "text-black" : "text-white"
           } p-1 md:p-0`}
         >
           {subHeading && (
-            <h1 className="text-2xl mb-10 lg:mb-16 font-light">{subHeading}</h1>
+            <h1 className="text-sm mb-10 font-light">{parse(subHeading)}</h1>
           )}
           <h1
             className={`main-heading font-bangla-mn ${
