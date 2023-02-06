@@ -163,6 +163,7 @@ nav .nav_item:after{
     background: transparent !important;
 }
 
+
 @media (max-width: 768px) {
     ._calendar{
         margin-top: 1rem !important;

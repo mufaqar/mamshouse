@@ -23,7 +23,7 @@ const SliderCard = ({item}) => {
             alt="hero card"
             width={500}
             height={520}  
-            className="w-full shadow-md h-[520px] rounded-[20px]"
+            className="w-full shadow-lg h-[520px] rounded-[20px]"
           />
           <div className="flex flex-col  justify-end top-[26px] -mt-[7.5rem] text-white w-full  ">
             <div className="flex justify-between items-center bg-gradient-to-t from-black/50 to-transparent rounded-[20px] rounded-t-none p-3 pt-10">
