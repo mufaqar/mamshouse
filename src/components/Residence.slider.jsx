@@ -17,7 +17,7 @@ const SliderCard = ({item}) => {
   return (
     <>
       <div className="p-2 mt-2 ">
-        <div className="relatives ">
+        <div className="">
           <Image
             src={item.feature_poster?.asset.url}
             alt="hero card"
@@ -25,8 +25,8 @@ const SliderCard = ({item}) => {
             height={520}  
             className="w-full shadow-md h-[520px] rounded-[20px]"
           />
-          <div className="absolute flex flex-col justify-end top-[26px] text-white w-full rounded-[20px] h-[520px] p-3 px-5">
-            <div className="flex justify-between items-center">
+          <div className="flex flex-col  justify-end top-[26px] -mt-[7.5rem] text-white w-full  ">
+            <div className="flex justify-between items-center bg-gradient-to-t from-black/50 to-transparent rounded-[20px] rounded-t-none p-3 pt-10">
               <div>
                 <p>
                   {item?.location}
