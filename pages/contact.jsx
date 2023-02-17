@@ -62,7 +62,7 @@ export default function Contact() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="tel:+221 123 456"
                   target="__blank"
                   className="flex items-center gap-3"
                 >
