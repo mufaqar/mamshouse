@@ -9,10 +9,12 @@ export default async function handler(
 
   console.log("🚀 ~ file: create-checkout-session.ts:10 ~ d", req.body)
   const orderdata  = JSON.parse(req.body)
-  console.log("🚀🚀🚀🚀🚀 ~ file: create-checkout-session.ts:11 ~ orderdata", orderdata)
+  //console.log("🚀🚀🚀🚀🚀 ~ file: create-checkout-session.ts:11 ~ orderdata", orderdata)
+
+  
 
   const objString = new URLSearchParams(orderdata.orderdata).toString();
-
+  console.log(orderdata.title);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -20,10 +22,10 @@ export default async function handler(
       price_data: {
         currency: 'usd',
         product_data: {
-          name: 'Stubborn Attachments',
-          images: ['https://i.imgur.com/EHyR2nP.png'],
+          name: "Mamshouse",
+       //   images: ['https://i.imgur.com/EHyR2nP.png'],
         },
-        unit_amount: 100,
+        unit_amount: 2400,
       },
       quantity: 1,
     },],
