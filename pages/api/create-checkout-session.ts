@@ -28,8 +28,8 @@ export default async function handler(
       quantity: 1,
     },],
     mode: 'payment',
-    success_url: `https://mamshouse.vercel.app/success?session_id={CHECKOUT_SESSION_ID}&${objString}`,
-    cancel_url: 'https://mamshouse.vercel.app/cancel',
+    success_url: `https://mamshouse.com/success?session_id={CHECKOUT_SESSION_ID}&${objString}`,
+    cancel_url: 'https://mamshouse.com/cancel',
   });
   console.log(session);
 

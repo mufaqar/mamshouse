@@ -1,14 +1,13 @@
-import axios from "axios";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-const stripe = require("stripe")(
-  "sk_test_51KZccKBYpJVF6ADtJIF54auA6RHJEEiEBasxyMMN8hvwOC2czH4rSBdt0tRCwCMw9gYUxynchdG5yjxCjYp44JyF00tvx0T4gJ"
+import axios from 'axios';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+const stripe = require('stripe')(
+  'sk_test_51KZccKBYpJVF6ADtJIF54auA6RHJEEiEBasxyMMN8hvwOC2czH4rSBdt0tRCwCMw9gYUxynchdG5yjxCjYp44JyF00tvx0T4gJ'
 );
 
 const Success = ({ res, session }) => {
-
   return (
     <>
       <Head>
@@ -27,7 +26,12 @@ const Success = ({ res, session }) => {
             <br /> we'll be in touch shortly!
           </p>
           <div className="mt-6">
-          <Link href="/" className="uppercase bg-black text-white px-8 text-sm py-3">Back to Home</Link>
+            <Link
+              href="/"
+              className="uppercase bg-black text-white px-8 text-sm py-3"
+            >
+              Back to Home
+            </Link>
           </div>
         </div>
       </div>
@@ -36,7 +40,6 @@ const Success = ({ res, session }) => {
 };
 
 export default Success;
-
 
 export const getServerSideProps = async (context) => {
   const id = context.query.session_id;
@@ -47,43 +50,46 @@ export const getServerSideProps = async (context) => {
   const paymentApproved = context.query.paymentApproved;
 
   const session = await stripe.checkout.sessions?.retrieve(id);
-  const email = session.customer_details?.email
+  const email = session.customer_details?.email;
 
-  if (session.status === "complete") {
-    await axios.post(`https://mamshouse.vercel.app/api/createOrder`, {
+  if (session.status === 'complete') {
+    await axios
+      .post(`https://mamshouse.com/api/createOrder`, {
         title,
         getStartDate,
         getEndDate,
         totalprice,
-        paymentApproved:true,
-        email
+        paymentApproved: true,
+        email,
       })
       .then(function (response) {
-        console.log("Order Submited");
+        console.log('Order Submited');
       })
       .catch(function (error) {
         console.log(error);
       });
   }
-  if (session.status === "complete") {
-    fetch(`https://mamshouse.vercel.app/api/sendMail`, {
+  if (session.status === 'complete') {
+    fetch(`https://mamshouse.com/api/sendMail`, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({title,
+      body: JSON.stringify({
+        title,
         getStartDate,
         getEndDate,
         totalprice,
-        paymentApproved:true,
-        email})
+        paymentApproved: true,
+        email,
+      }),
     }).then((res) => {
       // console.log('Response received')
       if (res.status === 200) {
-        console.log('Response succeeded!')
+        console.log('Response succeeded!');
       }
-    })
+    });
   }
 
   return {

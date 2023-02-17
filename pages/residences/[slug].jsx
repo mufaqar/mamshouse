@@ -1,31 +1,31 @@
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { PageBanner } from "../../src/components";
-import { HiArrowNarrowLeft } from "react-icons/hi";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx";
-import Image from "next/image";
-import { Calendar } from "react-multi-date-picker";
-import { DateObject } from "react-multi-date-picker";
-import { AiFillStar } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { PageBanner } from '../../src/components';
+import { HiArrowNarrowLeft } from 'react-icons/hi';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { RxCross2 } from 'react-icons/rx';
+import Image from 'next/image';
+import { Calendar } from 'react-multi-date-picker';
+import { DateObject } from 'react-multi-date-picker';
+import { AiFillStar } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 import {
   calculateDays,
   startEndDate,
-} from "../../src/store/features/BookingTabSlice/TotalBookingDays";
-import { useRouter } from "next/router";
-import axios from "axios";
-import Modal from "react-modal";
-import ArrowDownImg from "../../public/svg/arrow-down.svg";
-import NotFound from "../404";
-import Loading from "../../src/components/loading";
-import Head from "next/head";
+} from '../../src/store/features/BookingTabSlice/TotalBookingDays';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import Modal from 'react-modal';
+import ArrowDownImg from '../../public/svg/arrow-down.svg';
+import NotFound from '../404';
+import Loading from '../../src/components/loading';
+import Head from 'next/head';
 
 const Slug = ({ slug }) => {
   const router = useRouter();
   const id = router.query.slug;
-  const lang = router.query.lang || "en";
+  const lang = router.query.lang || 'en';
 
   const getTotalDays = useSelector((state) => state.TotalBookingDays.days);
   const getStartDate = useSelector((state) => state.TotalBookingDays.startDate);
@@ -65,11 +65,11 @@ const Slug = ({ slug }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     async function getSinglePost() {
       await axios
-        .post("/api/getsinglepost", { id: slug, lang })
+        .post('/api/getsinglepost', { id: slug, lang })
         .then(function (response) {
           setData(response.data[0]);
         })
@@ -96,27 +96,27 @@ const Slug = ({ slug }) => {
     };
     // sessionStorage.setItem("item", JSON.stringify(data2));
 
-    fetch(`https://mamshouse.vercel.app/api/create-checkout-session`, {
-      method: "POST",
+    fetch(`https://mamshouse.com/api/create-checkout-session`, {
+      method: 'POST',
       body: JSON.stringify({
         orderdata,
       }),
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("2nd responce", response);
+        console.log('2nd responce', response);
         window.location.href = response.session.url;
       });
   };
 
   const customStyles = {
     content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
     },
   };
 
@@ -161,7 +161,7 @@ const Slug = ({ slug }) => {
                 />
                 <div
                   className={`absolute top-0 p-6 ${
-                    shortInfo && "backdrop-blur-md"
+                    shortInfo && 'backdrop-blur-md'
                   } rounded-3xl h-full `}
                 >
                   {!shortInfo ? (
@@ -227,7 +227,7 @@ const Slug = ({ slug }) => {
                       €
                     </strong>
                     <sub className="ml-1">
-                      {days === 1 ? "par nuit" : `${days} units`}
+                      {days === 1 ? 'par nuit' : `${days} units`}
                     </sub>
                   </h6>
                   <div className="mt-6 border-b-2 border-gray-200 pb-4">
@@ -250,8 +250,8 @@ const Slug = ({ slug }) => {
                     }}
                     className={`border w-full p-2 mt-3 rounded-full text-base font-semibold ${
                       !selectDate
-                        ? "hover:bg-black cursor-pointer hover:text-white border-black text-black"
-                        : "text-gray-200 cursor-default border-gray-200"
+                        ? 'hover:bg-black cursor-pointer hover:text-white border-black text-black'
+                        : 'text-gray-200 cursor-default border-gray-200'
                     } `}
                   >
                     réserver maintenant
@@ -263,14 +263,14 @@ const Slug = ({ slug }) => {
                   )}
                   <h6
                     className={`text-sm font-semibold ${
-                      selectDate ? "mt-1" : "mt-3"
+                      selectDate ? 'mt-1' : 'mt-3'
                     }  mb-4 text-center underline cursor-pointer`}
                     onClick={() => {
                       setOpen(!open);
                       setSelectDate(false);
                     }}
                   >
-                    {open ? "-" : "+"} de détails
+                    {open ? '-' : '+'} de détails
                   </h6>
                 </div>
               </div>
@@ -310,7 +310,7 @@ const Slug = ({ slug }) => {
                 <button
                   type="button"
                   class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700"
-                  onClick={()=>setEmptyDateAlertModelState(false)}
+                  onClick={() => setEmptyDateAlertModelState(false)}
                 >
                   <span class="sr-only">Dismiss</span>
                   <svg
@@ -344,17 +344,17 @@ export default Slug;
 
 const ResidenceOrder = ({ renderState, features }) => {
   const dispatch = useDispatch();
-  const weekDays = ["Su.", "Mo.", "Tu.", "We.", "Th.", "Fr.", "Sa."];
+  const weekDays = ['Su.', 'Mo.', 'Tu.', 'We.', 'Th.', 'Fr.', 'Sa.'];
   const [values, setValues] = useState([new DateObject()]);
 
   var getStartDate = moment(
     `${values[0].year}/${values[0].month.number}/${values[0].day}`
   );
   let getEndDate = moment(
-    values.length >= "2" &&
+    values.length >= '2' &&
       `${values[1].year}/${values[1].month.number}/${values[1].day}`
   );
-  var totalDays = getEndDate.diff(getStartDate, "days");
+  var totalDays = getEndDate.diff(getStartDate, 'days');
 
   useEffect(() => {
     getEndDate._isValid && dispatch(calculateDays(totalDays));
@@ -374,20 +374,20 @@ const ResidenceOrder = ({ renderState, features }) => {
       <div className="container p-4 md:pl-0 md:pr-0 md:pb-0 mx-auto mb-10 md:grid md:grid-cols-5 pt-3 gap-4">
         <div className="pl-0 col-span-3 md:border-r-2 border-gray-200 md:px-4">
           <h6 className="font-medium text-xl mt-4">
-            {getEndDate._isValid ? totalDays + 1 : 1} nuits à{" "}
+            {getEndDate._isValid ? totalDays + 1 : 1} nuits à{' '}
             <strong>Poppengine</strong>
           </h6>
           <p className="text-base mt-1 text-gray-700">
-            {values[0].weekDay.shortName}. {values[0].day}{" "}
-            {values[0].month.name} -{" "}
-            {getEndDate._isValid && values[1].weekDay.shortName}.{" "}
-            {getEndDate._isValid && values[1].day}{" "}
+            {values[0].weekDay.shortName}. {values[0].day}{' '}
+            {values[0].month.name} -{' '}
+            {getEndDate._isValid && values[1].weekDay.shortName}.{' '}
+            {getEndDate._isValid && values[1].day}{' '}
             {getEndDate._isValid && values[1].month.name}
           </p>
           <Calendar
             value={values}
             onChange={setValues}
-            onClick={() => alert("111")}
+            onClick={() => alert('111')}
             range
             multiple
             numberOfMonths={2}

@@ -41,7 +41,7 @@ export default function PageBanner({
           <div className="flex justify-center ">
             {pageType === 'residence' && (
               <button className="mt-8 flex items-center font-semibold  text-xs">
-                Voir nos résidences
+                <Link href="#residences">Voir nos résidences</Link>
                 <HiOutlineArrowSmRight size={17} className="ml-1" />
               </button>
             )}
