@@ -21,7 +21,7 @@ export default function Contact() {
         src={ContactUsBannerBg}
         heading="Contact"
         pageType="contact"
-        info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+        info="If you have any questions or comments about the Mamshouse project, please feel free to reach out to us through our contact page. "
       />
       <section className="container mx-auto mt-28 p-2 md:p-0">
         <div className="md:flex items-center">
@@ -29,9 +29,9 @@ export default function Contact() {
             <div className="max-w-[500px]">
               <h3 className="font-bangla-mn text-[38px]">Nous contacter</h3>
               <p className="mt-2 font-light text-base">
-                Lorem ipsum dolor sit amet consectetur. In ipsum ac in posuere
-                cursus in cursus eleifend. Nisi in dolor aliquet nunc quis
-                tortor. Fusce at enim et amet viverra.
+                We would love to hear from you and are happy to provide any
+                information or assistance you may need. Thank you for your
+                interest in supporting our mission!
               </p>
             </div>
           </div>
@@ -79,13 +79,20 @@ export default function Contact() {
             <div className="max-w-[500px]">
               <h3 className="font-bangla-mn text-[38px]">Reservation</h3>
               <p className="mt-2 font-light text-base">
-                Lorem ipsum dolor sit amet consectetur. In ipsum ac in posuere.
+                Mamshouse is a selection of incredible places in the rural
+                landscape of Senegal
               </p>
             </div>
           </div>
           <div className="md:4/12 lg:w-3/12 mt-8 md:mt-0">
-            <button className="main-btn w-full">réserver maintenant</button>
-            <button className="mt-6 underline text-center font-semibold text-xs flex items-center gap-1 justify-center w-full">
+            <button className="main-btn w-full" href="/">
+              <Link href="/residences">réserver maintenant</Link>
+            </button>
+            <button
+              href="+221 123 456"
+              target="__blank"
+              className="mt-6 underline text-center font-semibold text-xs flex items-center gap-1 justify-center w-full"
+            >
               réserver sur Whatsapp <HiOutlineArrowSmRight size={18} />
             </button>
           </div>
@@ -96,9 +103,8 @@ export default function Contact() {
             <div className="max-w-[500px]">
               <h3 className="font-bangla-mn text-[38px]">Locations</h3>
               <p className="mt-2 font-light text-base">
-                Lorem ipsum dolor sit amet consectetur. In ipsum ac in posuere
-                cursus in cursus eleifend. Nisi in dolor aliquet nunc quis
-                tortor.
+                Route du Pilier, 22600 Poppengnne, Senegal: This location is in
+                the city of Poppengnne in Senegal.
               </p>
             </div>
           </div>
