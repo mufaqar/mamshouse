@@ -88,7 +88,7 @@ export default function ResidenceSlider({residencesData}) {
   };
 
   return (
-    <section className="mt-9 container mx-auto p-1 md:p-0 mb-10">
+    <section className="mt-9 container mx-auto p-1 md:p-0 mb-10" id="residences">
       <h1 className="sub-heading font-bangla-mn capitalize">Nos Résidences</h1>
       <div className="relative">
         <Slider {...settings}>
