@@ -40,7 +40,7 @@ export default function Contact() {
             <ul className="w-full flex p-0 md:pl-10 flex-col justify-center gap-6">
               <li>
                 <Link
-                  href="https://www.instagram.com/mamshouse/"
+                  href="https://www.instagram.com/mamshouse"
                   target="__blank"
                   className="flex items-center gap-3"
                 >
