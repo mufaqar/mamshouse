@@ -13,13 +13,13 @@ export default function Main() {
         className="w-full h-[500px] md:h-screen object-cover 2xl:h-[90vh]"
       />
       <div className="absolute top-[30%] md:left-[10%] lg:left-[20%] max-w-4xl px-10">
-        <h1 className="lg:text-[42px] md:text-[36px] text-[25px] font-light text-white font-bangla-mn ">
+        <h1 className="lg:text-[42px] md:text-[36px] text-[25px] font-light text-white font-bangla-mn mb-5 ">
           Mamshouse is a selection of incredible places in the rural landscape
           of Senegal
         </h1>
         <Link
           href="/residences#residences"
-          className="main-btn px-10 text-white border-white "
+          className="main-btn px-10 text-white border-white"
         >
           make a reservation
         </Link>
