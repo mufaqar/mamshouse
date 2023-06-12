@@ -261,27 +261,17 @@ const Slug = ({ slug }) => {
                       Please select date first!
                     </p>
                   )}
-                  <h6
-                    className={`text-sm font-semibold ${
-                      selectDate ? 'mt-1' : 'mt-3'
-                    }  mb-4 text-center underline cursor-pointer`}
-                    onClick={() => {
-                      setOpen(!open);
-                      setSelectDate(false);
-                    }}
-                  >
-                    {open ? '-' : '+'} de détails
-                  </h6>
+                  
                 </div>
               </div>
             </div>
           </section>
-          {open && (
+          
             <ResidenceOrder
               renderState={renderState}
               features={data?.features}
             />
-          )}
+          
           {/* models triggred when start and end date not exist or length less then or equal 0 */}
           {EmptyDateAlertModelState && (
             <section className="max-w-[500px] fixed bottom-2 left-6">

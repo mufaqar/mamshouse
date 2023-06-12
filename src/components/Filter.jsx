@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TbLocation } from "react-icons/tb";
-import { FiSearch } from "react-icons/fi";
+import { BsCheck2 } from "react-icons/bs";
 import { AiOutlineCalendar, AiOutlineTeam } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
@@ -121,10 +121,10 @@ export default function Filter() {
           {/* search */}
           <div>
             <div
-              className="cursor-pointer inline-block border border-black p-2 rounded-full"
+              className="cursor-pointer inline-block border text-gray-800 border-black p-2 rounded-full"
               onClick={handleSubmit(onSubmit)}
             >
-              <FiSearch />
+              <BsCheck2 />
             </div>
           </div>
         </div>
