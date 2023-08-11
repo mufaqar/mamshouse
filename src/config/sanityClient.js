@@ -5,5 +5,4 @@ import { createClient } from "next-sanity";
       apiVersion: "2021-10-14",
       useCdn: false
   }
-  
   export const sanityClient = createClient(config);
