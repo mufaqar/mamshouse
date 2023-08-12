@@ -9,5 +9,4 @@ const i18n = {
   defaultLang: "en",
   useBrowserDefault: true,
 };
-
 module.exports = i18n;
