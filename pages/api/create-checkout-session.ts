@@ -14,7 +14,7 @@ export default async function handler(
   
 
   const objString = new URLSearchParams(orderdata.orderdata).toString();
-  console.log(orderdata.title);
+  //console.log(orderdata.title);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
