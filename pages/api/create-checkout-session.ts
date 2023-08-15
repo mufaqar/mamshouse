@@ -9,7 +9,7 @@ export default async function handler(
 
   console.log("🚀 ~ file: create-checkout-session.ts:10 ~ d", req.body)
   const orderdata  = JSON.parse(req.body)
-  //console.log("🚀🚀🚀🚀🚀 ~ file: create-checkout-session.ts:11 ~ orderdata", orderdata)
+  //console.log("🚀🚀🚀🚀🚀 ~~ file: create-checkout-session.ts:11 ~ orderdata", orderdata)
 
   
 
