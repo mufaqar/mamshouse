@@ -6,7 +6,6 @@ const store = configureStore({
     reducer:{
         openBookingTab : openBookingTabSlice.reducer,
         TotalBookingDays: TotalBookingDays.reducer,
-
     }
 })
 
