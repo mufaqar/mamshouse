@@ -12,8 +12,6 @@ export {default as E3} from './images/e3.png'
 export {default as ContactUsBannerBg} from './images/contact-us-page-banner.png'
 
 
-
-
 // svg imports 
 export {default as Pool} from './svg/pool.svg'
 export {default as Tv} from './svg/tv.svg'
