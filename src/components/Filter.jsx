@@ -17,7 +17,7 @@ export default function Filter() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("🚀 ~ file: Filter.jsx:20 ~ onSubmit ~ data", data);
+  //  console.log("🚀 ~ file: Filter.jsx:20 ~ onSubmit ~ data", data);
     const query = { ...data, origin, lang: router.query?.lang };
     /* It's checking if the form is empty. */
     data.arrival === "" &&
