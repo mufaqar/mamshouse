@@ -15,7 +15,7 @@ const NotFound = () => {
           <center class=" m-auto">
             <div class=" tracking-widest mt-4">
               <span class="text-gray-500 text-6xl block font-bangla-mn ">
-                <span>404 ! Page not found!</span>
+                <span>404 ! Page not found !</span>
               </span>
               <span class="text-gray-500 text-xl font-bangla-mn">
                 Sorry, We couldn't find what you are looking for!
