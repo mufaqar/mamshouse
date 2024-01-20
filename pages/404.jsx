@@ -12,7 +12,7 @@ const NotFound = () => {
       </Head>
       <div class="bg-gray-100 h-screen justify-center flex items-center flex-col ">
         <div>
-          <center class=" m-auto">
+          <center class="m-auto">
             <div class=" tracking-widest mt-4">
               <span class="text-gray-500 text-6xl block font-bangla-mn ">
                 <span> 404 ! Page not found !</span>
