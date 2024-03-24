@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 
 export default function Filter() {
   const [origin, setOrigin] = useState("Lieux");
-
   const router = useRouter();
   const {
     register,
