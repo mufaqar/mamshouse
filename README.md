@@ -6,4 +6,3 @@
 
 
 Vercel integration 
-New 
