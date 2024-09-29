@@ -4,7 +4,6 @@ import { BsCheck2 } from "react-icons/bs";
 import { AiOutlineCalendar, AiOutlineTeam } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-
 export default function Filter() {
   const [origin, setOrigin] = useState("Lieux");
   const router = useRouter();
